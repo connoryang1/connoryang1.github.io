@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import { Resizable } from "re-resizable";
 
 type WindowProps = {
   id: string;
@@ -44,37 +45,41 @@ export default function Window({
   }
 
   return (
-    <div
+    <Resizable
       className={styles.window}
-      ref={setNodeRef}
       style={{ ...style, ...dragStyles }}
-      onClick={() => setWindowActive(id)}
+      defaultSize={{
+        width: 320,
+        height: 200,
+      }}
     >
-      <div className={styles.windowTitleBar} {...listeners} {...attributes}>
-        <div className={styles.windowTitle}>{title}</div>
-        <div className={styles.windowControls} data-no-dnd={true}>
-          <button className={styles.windowControl}>
-            <FontAwesomeIcon icon={faWindowMinimize} />
-          </button>
-          <button className={styles.windowControl} onClick={maximizeWindow}>
-            <FontAwesomeIcon icon={faWindowMaximize} />
-          </button>
-          <button
-            className={styles.windowControl}
-            onClick={(event) => closeWindow(event, id)}
-          >
-            <FontAwesomeIcon icon={faWindowClose} />
-          </button>
+      <div ref={setNodeRef} onClick={() => setWindowActive(id)}>
+        <div className={styles.windowTitleBar} {...listeners} {...attributes}>
+          <div className={styles.windowTitle}>{title}</div>
+          <div className={styles.windowControls} data-no-dnd={true}>
+            <button className={styles.windowControl}>
+              <FontAwesomeIcon icon={faWindowMinimize} />
+            </button>
+            <button className={styles.windowControl} onClick={maximizeWindow}>
+              <FontAwesomeIcon icon={faWindowMaximize} />
+            </button>
+            <button
+              className={styles.windowControl}
+              onClick={(event) => closeWindow(event, id)}
+            >
+              <FontAwesomeIcon icon={faWindowClose} />
+            </button>
+          </div>
+        </div>
+        <div className={styles.windowContent}>
+          <div className={styles.windowContentInner}>
+            <p>
+              This is a window. It has a title bar, controls, and content. It
+              can be moved around, resized, and closed. It's a window.
+            </p>
+          </div>
         </div>
       </div>
-      <div className={styles.windowContent}>
-        <div className={styles.windowContentInner}>
-          <p>
-            This is a window. It has a title bar, controls, and content. It can
-            be moved around, resized, and closed. It's a window.
-          </p>
-        </div>
-      </div>
-    </div>
+    </Resizable>
   );
 }
