@@ -13,6 +13,7 @@ type WindowProps = {
   title: string;
   styles: any;
   closeWindow: any;
+  setWindowActive: any;
 };
 
 export default function Window({
@@ -20,6 +21,7 @@ export default function Window({
   title,
   styles: dragStyles,
   closeWindow,
+  setWindowActive,
 }: WindowProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
@@ -33,6 +35,7 @@ export default function Window({
       className={styles.window}
       ref={setNodeRef}
       style={{ ...style, ...dragStyles }}
+      onClick={() => setWindowActive(id)}
     >
       <div className={styles.windowTitleBar} {...listeners} {...attributes}>
         <div className={styles.windowTitle}>{title}</div>

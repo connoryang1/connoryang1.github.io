@@ -35,6 +35,7 @@ export default function Home() {
   return (
     <>
       <DndContext
+        onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         modifiers={[restrictToWindowEdges]}
         sensors={[mouseSensor, touchSensor]}
@@ -49,8 +50,10 @@ export default function Home() {
                 position: "absolute",
                 top: window.position.y,
                 left: window.position.x,
+                zIndex: window.active ? 1 : 0,
               }}
               closeWindow={closeWindow}
+              setWindowActive={setWindowActive}
             />
           ))}
         </Desktop>
@@ -59,6 +62,10 @@ export default function Home() {
       {/* <div style={{ height: "1000rem" }}></div> */}
     </>
   );
+
+  function handleDragStart(event: any) {
+    setWindowActive(event.active.id);
+  }
 
   function handleDragEnd(event: any) {
     const window = windows.find((window) => window.id === event.active.id);
@@ -82,5 +89,16 @@ export default function Home() {
     const _windows = windows.filter((window) => window.id !== id);
     setWindows(_windows);
     console.log("close window", id);
+  }
+
+  function setWindowActive(id: string) {
+    const _windows = windows.map((window) => {
+      if (window.id === id) {
+        return { ...window, active: true };
+      }
+      return { ...window, active: false };
+    });
+
+    setWindows(_windows);
   }
 }
