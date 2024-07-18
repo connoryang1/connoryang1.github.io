@@ -2,12 +2,13 @@
 
 import styles from "./page.module.scss";
 
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, useSensor } from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 import Navbar from "@/components/Navbar";
 import Window from "@/components/Window";
 import Desktop from "@/components/Desktop";
+import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
 import { useState } from "react";
 
 const windowData = [
@@ -15,15 +16,29 @@ const windowData = [
     id: "1",
     title: "Window 1",
     position: { x: 0, y: 0 },
+    active: true,
+  },
+  {
+    id: "2",
+    title: "Window 2",
+    position: { x: 200, y: 200 },
+    active: false,
   },
 ];
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
 
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+
   return (
     <>
-      <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
+      <DndContext
+        onDragEnd={handleDragEnd}
+        modifiers={[restrictToWindowEdges]}
+        sensors={[mouseSensor, touchSensor]}
+      >
         <Desktop>
           {windows.map((window) => (
             <Window
@@ -35,12 +50,13 @@ export default function Home() {
                 top: window.position.y,
                 left: window.position.x,
               }}
+              closeWindow={closeWindow}
             />
           ))}
         </Desktop>
       </DndContext>
       <Navbar />
-      <div style={{ height: "1000rem" }}></div>
+      {/* <div style={{ height: "1000rem" }}></div> */}
     </>
   );
 
@@ -60,5 +76,11 @@ export default function Home() {
     });
 
     setWindows(_windows);
+  }
+
+  function closeWindow(id: string) {
+    const _windows = windows.filter((window) => window.id !== id);
+    setWindows(_windows);
+    console.log("close window", id);
   }
 }

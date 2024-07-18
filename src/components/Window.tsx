@@ -8,15 +8,19 @@ import {
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
+type WindowProps = {
+  id: string;
+  title: string;
+  styles: any;
+  closeWindow: any;
+};
+
 export default function Window({
   id,
   title,
   styles: dragStyles,
-}: {
-  id: string;
-  title: string;
-  styles: any;
-}) {
+  closeWindow,
+}: WindowProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
   });
@@ -32,14 +36,17 @@ export default function Window({
     >
       <div className={styles.windowTitleBar} {...listeners} {...attributes}>
         <div className={styles.windowTitle}>{title}</div>
-        <div className={styles.windowControls}>
+        <div className={styles.windowControls} data-no-dnd={true}>
           <button className={styles.windowControl}>
             <FontAwesomeIcon icon={faWindowMinimize} />
           </button>
           <button className={styles.windowControl}>
             <FontAwesomeIcon icon={faWindowMaximize} />
           </button>
-          <button className={styles.windowControl}>
+          <button
+            className={styles.windowControl}
+            onClick={() => closeWindow(id)}
+          >
             <FontAwesomeIcon icon={faWindowClose} />
           </button>
         </div>
