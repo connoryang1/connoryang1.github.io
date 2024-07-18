@@ -1,10 +1,13 @@
-.window {
-  background-color: #ffffff;
+.resizable {
+  background-color: blue;
   border: 1px solid #e0e0e0;
   border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 20rem;
   height: 20rem;
+}
+
+.window {
   user-select: none;
 }
 

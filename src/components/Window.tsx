@@ -15,6 +15,7 @@ type WindowProps = {
   styles: any;
   closeWindow: any;
   setWindowActive: any;
+  minimizeWindow: any;
 };
 
 export default function Window({
@@ -23,6 +24,7 @@ export default function Window({
   styles: dragStyles,
   closeWindow,
   setWindowActive,
+  minimizeWindow,
 }: WindowProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
@@ -31,55 +33,70 @@ export default function Window({
     transform: CSS.Translate.toString(transform),
   };
 
-  function maximizeWindow(event: any) {
-    event.preventDefault();
+  // function maximizeWindow(event: any) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
 
-    const window =
-      event.target.parentElement.parentElement.parentElement.parentElement
-        .parentElement;
+  //   const window =
+  //     event.target.parentElement.parentElement.parentElement.parentElement
+  //       .parentElement;
 
-    console.log(window);
-    window.style.height = "80%";
-    window.style.width = "100%";
-    window.style.top = 0;
-  }
+  //   console.log(window);
+  //   window.style.height = "80%";
+  //   window.style.width = "100%";
+  //   window.style.top = 0;
+  //   window.style.left = 0;
+  // }
 
   return (
-    <Resizable
-      className={styles.window}
+    // <Resizable
+    //   // className={styles.resizable}
+    //   style={{ ...style, ...dragStyles }}
+    //   defaultSize={{
+    //     width: 300,
+    //     height: 300,
+    //   }}
+    //   minHeight={200}
+    //   minWidth={200}
+    // >
+    <div
+      ref={setNodeRef}
+      onClick={() => setWindowActive(id)}
       style={{ ...style, ...dragStyles }}
-      defaultSize={{
-        width: 320,
-        height: 200,
-      }}
+      className={styles.resizable + " " + styles.window}
     >
-      <div ref={setNodeRef} onClick={() => setWindowActive(id)}>
-        <div className={styles.windowTitleBar} {...listeners} {...attributes}>
-          <div className={styles.windowTitle}>{title}</div>
-          <div className={styles.windowControls} data-no-dnd={true}>
-            <button className={styles.windowControl}>
-              <FontAwesomeIcon icon={faWindowMinimize} />
-            </button>
-            <button className={styles.windowControl} onClick={maximizeWindow}>
-              <FontAwesomeIcon icon={faWindowMaximize} />
-            </button>
-            <button
-              className={styles.windowControl}
-              onClick={(event) => closeWindow(event, id)}
-            >
-              <FontAwesomeIcon icon={faWindowClose} />
-            </button>
-          </div>
-        </div>
-        <div className={styles.windowContent}>
-          <div className={styles.windowContentInner}>
-            <p>
-              This is a window. It has a title bar, controls, and content. It
-              can be moved around, resized, and closed. It's a window.
-            </p>
-          </div>
+      <div className={styles.windowTitleBar} {...listeners} {...attributes}>
+        <div className={styles.windowTitle}>{title}</div>
+        <div className={styles.windowControls} data-no-dnd={true}>
+          <button
+            className={styles.windowControl}
+            onClick={(event) => minimizeWindow(event, id)}
+          >
+            <FontAwesomeIcon icon={faWindowMinimize} />
+          </button>
+          <button
+            className={styles.windowControl}
+            // onClick={(event) => maximizeWindow(event)}
+          >
+            <FontAwesomeIcon icon={faWindowMaximize} />
+          </button>
+          <button
+            className={styles.windowControl}
+            onClick={(event) => closeWindow(event, id)}
+          >
+            <FontAwesomeIcon icon={faWindowClose} />
+          </button>
         </div>
       </div>
-    </Resizable>
+      <div className={styles.windowContent}>
+        <div className={styles.windowContentInner}>
+          <p>
+            This is a window. It has a title bar, controls, and content. It can
+            be moved around, resized, and closed. It's a window.
+          </p>
+        </div>
+      </div>
+    </div>
+    // </Resizable>
   );
 }
