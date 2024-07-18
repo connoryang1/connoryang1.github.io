@@ -1,0 +1,45 @@
+.window {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 20rem;
+  height: 20rem;
+  user-select: none;
+}
+
+.windowTitleBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.windowTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.windowControls {
+  display: flex;
+  gap: 8px;
+}
+
+.windowControl {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.windowContent {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.windowContentInner {
+  display: flex;
+  flex-direction: column;
+}

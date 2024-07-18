@@ -1,0 +1,32 @@
+.navbar {
+
+  z-index: 1000;
+
+  padding: 1rem 2rem;
+
+  background: blue;
+  color: #fff;
+  border-radius: 1rem;
+
+  // Center icons
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.navItems {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+
+.navIcon {
+  font-size: 3rem;
+  color: black;
+}
