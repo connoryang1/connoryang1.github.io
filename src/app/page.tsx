@@ -85,7 +85,8 @@ export default function Home() {
     setWindows(_windows);
   }
 
-  function closeWindow(id: string) {
+  function closeWindow(event: any, id: string) {
+    event.stopPropagation();
     const _windows = windows.filter((window) => window.id !== id);
     setWindows(_windows);
     console.log("close window", id);

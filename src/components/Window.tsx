@@ -30,6 +30,19 @@ export default function Window({
     transform: CSS.Translate.toString(transform),
   };
 
+  function maximizeWindow(event: any) {
+    event.preventDefault();
+
+    const window =
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement;
+
+    console.log(window);
+    window.style.height = "80%";
+    window.style.width = "100%";
+    window.style.top = 0;
+  }
+
   return (
     <div
       className={styles.window}
@@ -43,12 +56,12 @@ export default function Window({
           <button className={styles.windowControl}>
             <FontAwesomeIcon icon={faWindowMinimize} />
           </button>
-          <button className={styles.windowControl}>
+          <button className={styles.windowControl} onClick={maximizeWindow}>
             <FontAwesomeIcon icon={faWindowMaximize} />
           </button>
           <button
             className={styles.windowControl}
-            onClick={() => closeWindow(id)}
+            onClick={(event) => closeWindow(event, id)}
           >
             <FontAwesomeIcon icon={faWindowClose} />
           </button>
