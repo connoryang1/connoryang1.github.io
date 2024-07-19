@@ -4,18 +4,22 @@
 
   padding: 1rem 2rem;
 
-  background: blue;
+  // Style navbar background
+  background: #242b38;
   color: #fff;
   border-radius: 1rem;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
 
   // Center icons
   display: flex;
   flex-direction: row;
   justify-content: center;
 
+  // Center navbar at bottom
   position: absolute;
-  left: 1rem;
-  right: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 1rem;
 }
 
@@ -24,10 +28,10 @@
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .navIcon {
-  font-size: 3rem;
-  color: black;
+  font-size: 2rem;
+  color: #a5b0c5;
 }

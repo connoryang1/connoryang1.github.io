@@ -45,6 +45,7 @@ export default function Home() {
         onDragEnd={handleDragEnd}
         modifiers={[restrictToParentElement]}
         sensors={[mouseSensor, touchSensor]}
+        autoScroll={false}
       >
         <Desktop>
           {windows

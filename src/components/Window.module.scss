@@ -1,8 +1,10 @@
 .resizable {
-  background-color: blue;
-  border: 1px solid #e0e0e0;
-  border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(36, 43, 56, 0.7);
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+
+  border-radius: 0.5rem;
+
   width: 20rem;
   height: 20rem;
 }
@@ -15,13 +17,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
   padding: 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #343e4f;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
 }
 
 .windowTitle {
-  font-size: 1.2rem;
+  color: #a5b0c5;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -34,6 +38,7 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
+  color: #a5b0c5;
 }
 
 .windowContent {
@@ -45,4 +50,6 @@
 .windowContentInner {
   display: flex;
   flex-direction: column;
+  color: #a5b0c5;
+  font-size: 0.9rem;
 }

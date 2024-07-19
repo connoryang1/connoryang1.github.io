@@ -33,32 +33,7 @@ export default function Window({
     transform: CSS.Translate.toString(transform),
   };
 
-  // function maximizeWindow(event: any) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-
-  //   const window =
-  //     event.target.parentElement.parentElement.parentElement.parentElement
-  //       .parentElement;
-
-  //   console.log(window);
-  //   window.style.height = "80%";
-  //   window.style.width = "100%";
-  //   window.style.top = 0;
-  //   window.style.left = 0;
-  // }
-
   return (
-    // <Resizable
-    //   // className={styles.resizable}
-    //   style={{ ...style, ...dragStyles }}
-    //   defaultSize={{
-    //     width: 300,
-    //     height: 300,
-    //   }}
-    //   minHeight={200}
-    //   minWidth={200}
-    // >
     <div
       ref={setNodeRef}
       onClick={() => setWindowActive(id)}
@@ -74,10 +49,7 @@ export default function Window({
           >
             <FontAwesomeIcon icon={faWindowMinimize} />
           </button>
-          <button
-            className={styles.windowControl}
-            // onClick={(event) => maximizeWindow(event)}
-          >
+          <button className={styles.windowControl}>
             <FontAwesomeIcon icon={faWindowMaximize} />
           </button>
           <button
@@ -97,6 +69,5 @@ export default function Window({
         </div>
       </div>
     </div>
-    // </Resizable>
   );
 }
