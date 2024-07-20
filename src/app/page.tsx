@@ -3,17 +3,14 @@
 import styles from "./page.module.scss";
 
 import { DndContext, useSensor } from "@dnd-kit/core";
-import {
-  restrictToFirstScrollableAncestor,
-  restrictToParentElement,
-  restrictToWindowEdges,
-} from "@dnd-kit/modifiers";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 import Navbar from "@/components/Navbar";
 import Window from "@/components/Window";
 import Desktop from "@/components/Desktop";
 import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 const windowData = [
   {
@@ -34,12 +31,13 @@ const windowData = [
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
+  const { scrollYProgress } = useScroll();
 
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
 
   return (
-    <>
+    <motion.div className={styles.main} style={{ scale: scrollYProgress }}>
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
@@ -48,33 +46,36 @@ export default function Home() {
         autoScroll={false}
       >
         <Desktop>
-          {windows
-            .filter((window) => !window.minimized)
-            .map((window) => (
-              <Window
-                key={window.id}
-                id={window.id}
-                title={window.title}
-                styles={{
-                  position: "absolute",
-                  top: window.position.y,
-                  left: window.position.x,
-                  zIndex: window.active ? 1 : 0,
-                }}
-                closeWindow={closeWindow}
-                setWindowActive={setWindowActive}
-                minimizeWindow={minimizeWindow}
-              />
-            ))}
+          <AnimatePresence>
+            {windows
+              .filter((window) => !window.minimized)
+              .map((window) => (
+                <Window
+                  key={window.id}
+                  id={window.id}
+                  title={window.title}
+                  styles={{
+                    position: "absolute",
+                    top: window.position.y,
+                    left: window.position.x,
+                    zIndex: window.active ? 1 : 0,
+                  }}
+                  closeWindow={closeWindow}
+                  setWindowActive={setWindowActive}
+                  minimizeWindow={minimizeWindow}
+                />
+              ))}
+          </AnimatePresence>
         </Desktop>
       </DndContext>
+
       <Navbar
         generateNewWindow={generateNewWindow}
         setWindowActive={setWindowActive}
         minimizedWindows={windows.filter((window) => window.minimized)}
       />
       <div style={{ height: "100rem" }}></div>
-    </>
+    </motion.div>
   );
 
   function handleDragStart(event: any) {
@@ -151,9 +152,7 @@ export default function Home() {
     setWindows(_windows);
   }
 
-  function minimizeWindow(event: any, id: string) {
-    event.stopPropagation();
-
+  function minimizeWindow(id: string) {
     const _windows = windows.map((window) => {
       if (window.id === id) {
         return { ...window, minimized: true };
