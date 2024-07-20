@@ -1,16 +1,8 @@
 "use client";
 
-import styles from "./page.module.scss";
-
-import { DndContext, useSensor } from "@dnd-kit/core";
-import { restrictToParentElement } from "@dnd-kit/modifiers";
-
 import Navbar from "@/components/Navbar";
-import Window from "@/components/Window";
+import { useState } from "react";
 import Desktop from "@/components/Desktop";
-import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 const windowData = [
   {
@@ -31,81 +23,22 @@ const windowData = [
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
-  const { scrollYProgress } = useScroll();
-
-  const mouseSensor = useSensor(MouseSensor);
-  const touchSensor = useSensor(TouchSensor);
 
   return (
-    <motion.div className={styles.main} style={{ scale: scrollYProgress }}>
-      <DndContext
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        modifiers={[restrictToParentElement]}
-        sensors={[mouseSensor, touchSensor]}
-        autoScroll={false}
-      >
-        <Desktop>
-          <AnimatePresence>
-            {windows
-              .filter((window) => !window.minimized)
-              .map((window) => (
-                <Window
-                  key={window.id}
-                  id={window.id}
-                  title={window.title}
-                  styles={{
-                    position: "absolute",
-                    top: window.position.y,
-                    left: window.position.x,
-                    zIndex: window.active ? 1 : 0,
-                  }}
-                  closeWindow={closeWindow}
-                  setWindowActive={setWindowActive}
-                  minimizeWindow={minimizeWindow}
-                />
-              ))}
-          </AnimatePresence>
-        </Desktop>
-      </DndContext>
-
+    <>
+      <Desktop
+        windows={windows}
+        setWindows={setWindows}
+        setWindowActive={setWindowActive}
+      />
       <Navbar
         generateNewWindow={generateNewWindow}
         setWindowActive={setWindowActive}
         minimizedWindows={windows.filter((window) => window.minimized)}
       />
       <div style={{ height: "100rem" }}></div>
-    </motion.div>
+    </>
   );
-
-  function handleDragStart(event: any) {
-    setWindowActive(event.active.id);
-  }
-
-  function handleDragEnd(event: any) {
-    const window = windows.find((window) => window.id === event.active.id);
-
-    if (!window || !(event.over && event.over.id == "desktop")) return;
-
-    window.position.x += event.delta.x;
-    window.position.y += event.delta.y;
-
-    const _windows = windows.map((w) => {
-      if (w.id === window.id) {
-        return window;
-      }
-      return w;
-    });
-
-    setWindows(_windows);
-  }
-
-  function closeWindow(event: any, id: string) {
-    event.stopPropagation();
-    const _windows = windows.filter((window) => window.id !== id);
-    setWindows(_windows);
-    console.log("close window", id);
-  }
 
   function setWindowActive(id: string) {
     const window = windows.find((window) => window.id === id);
@@ -149,18 +82,6 @@ export default function Home() {
         minimized: false,
       },
     ];
-    setWindows(_windows);
-  }
-
-  function minimizeWindow(id: string) {
-    const _windows = windows.map((window) => {
-      if (window.id === id) {
-        return { ...window, minimized: true };
-      }
-      return window;
-    });
-    console.log(_windows);
-
     setWindows(_windows);
   }
 }

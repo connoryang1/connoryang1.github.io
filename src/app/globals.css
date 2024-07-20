@@ -8,3 +8,9 @@
 
   font-family: 'JetBrains Mono', monospace;
 }
+
+html {
+  scroll-behavior: smooth;
+
+  background-color: #363c51;
+}
