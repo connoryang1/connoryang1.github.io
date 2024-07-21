@@ -1,8 +1,9 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Desktop from "@/components/Desktop";
+import Lenis from "lenis";
 
 const windowData = [
   {
@@ -24,6 +25,18 @@ const windowData = [
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 0.5,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  });
   return (
     <>
       <Desktop

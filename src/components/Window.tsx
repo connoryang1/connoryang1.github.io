@@ -51,7 +51,7 @@ export default function Window({
             opacity: 1,
             height: "20rem",
           },
-          { duration: 0.5 }
+          { duration: 1, ease: "anticipate" }
         );
       };
       enterAnimation();
