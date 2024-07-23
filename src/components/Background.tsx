@@ -9,7 +9,7 @@ export default function Background(props: any) {
 
   return (
     <div ref={setNodeRef} className={styles.desktop}>
-      {/* <img src={keyboards.src} className={styles.image} /> */}
+      <img src={keyboards.src} className={styles.image} />
       {props.children}
     </div>
   );

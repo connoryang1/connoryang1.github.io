@@ -1,22 +1,32 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import Desktop from "@/components/Desktop";
 import Lenis from "lenis";
+import keyboards from "@/assets/keyboards.jpeg";
+import styles from "@/app/page.module.scss";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useMotionValueEvent,
+} from "framer-motion";
+import DesktopIcon from "@/components/DesktopIcon";
+import Loading from "@/components/Loading";
 
 const windowData = [
   {
-    id: "1",
-    title: "Window 1",
-    position: { x: 0, y: 0 },
+    id: "window-1",
+    title: "Welcome",
+    position: { x: 100, y: 100 },
     active: true,
     minimized: false,
   },
   {
-    id: "2",
+    id: "window-2",
     title: "Window 2",
-    position: { x: 200, y: 200 },
+    position: { x: 400, y: 400 },
     active: false,
     minimized: false,
   },
@@ -24,6 +34,23 @@ const windowData = [
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
+  const targetRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["end center", "end end"],
+  });
+  const opacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
+
+  const [loading, setLoading] = useState(true);
+
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    console.log(scrollYProgress.get());
+  });
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 100);
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -39,17 +66,29 @@ export default function Home() {
   });
   return (
     <>
-      <Desktop
-        windows={windows}
-        setWindows={setWindows}
-        setWindowActive={setWindowActive}
-      />
-      <Navbar
-        generateNewWindow={generateNewWindow}
-        setWindowActive={setWindowActive}
-        minimizedWindows={windows.filter((window) => window.minimized)}
-      />
-      <div style={{ height: "100rem" }}></div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <img src={keyboards.src} className={styles.backgroundImage} />
+          <motion.div className={styles.header} style={{ opacity }}>
+            Hello. My name is Connor.
+          </motion.div>
+          <Desktop
+            windows={windows}
+            setWindows={setWindows}
+            setWindowActive={setWindowActive}
+            targetRef={targetRef}
+          />
+          <Navbar
+            generateNewWindow={generateNewWindow}
+            setWindowActive={setWindowActive}
+            minimizedWindows={windows.filter((window) => window.minimized)}
+            targetRef={targetRef}
+          />
+          <div style={{ height: "30rem" }}></div>
+        </>
+      )}
     </>
   );
 
@@ -70,6 +109,11 @@ export default function Home() {
   }
 
   function generateNewWindow() {
+    if (windows.length >= 10) {
+      alert("You have reached the maximum number of windows.");
+      return;
+    }
+
     const sortedWindows = windows.sort(
       (a, b) => parseInt(a.id) - parseInt(b.id)
     );
@@ -77,18 +121,18 @@ export default function Home() {
     let id = String(sortedWindows.length + 1);
 
     for (let i = 0; i < sortedWindows.length; i++) {
-      if (sortedWindows[i].id != String(i + 1)) {
+      if (sortedWindows[i].id != "window-" + String(i + 1)) {
         id = String(i + 1);
         break;
       }
     }
 
-    const randX = Math.floor(Math.random() * 1000);
-    const randY = Math.floor(Math.random() * 500);
+    const randX = Math.floor(Math.random() * 400);
+    const randY = Math.floor(Math.random() * 600);
     const _windows = [
       ...windows,
       {
-        id: id,
+        id: "window-" + id,
         title: "Window " + id,
         position: { x: randX, y: randY },
         active: true,

@@ -49,7 +49,7 @@ export default function Window({
           scope.current,
           {
             opacity: 1,
-            height: "20rem",
+            // height: "20rem",
           },
           { duration: 1, ease: "anticipate" }
         );
@@ -59,7 +59,8 @@ export default function Window({
       const exitAnimation = async () => {
         await animate(
           scope.current,
-          { opacity: 0, height: 0 },
+          // { opacity: 0, height: 0 },
+          { opacity: 0 },
           { duration: 0.5 }
         );
         safeToRemove();
