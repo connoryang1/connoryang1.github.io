@@ -15,18 +15,18 @@ type WindowProps = {
   id: string;
   title: string;
   styles: any;
-  closeWindow: any;
+  handleCloseWindow: any;
   setWindowActive: any;
-  minimizeWindow: any;
+  handleMinimizeWindow: any;
 };
 
 export default function Window({
   id,
   title,
   styles: dragStyles,
-  closeWindow,
+  handleCloseWindow,
   setWindowActive,
-  minimizeWindow,
+  handleMinimizeWindow: minimizeWindow,
 }: WindowProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
@@ -98,7 +98,7 @@ export default function Window({
             </button>
             <button
               className={styles.windowControl}
-              onClick={(e) => closeWindow(e, id)}
+              onClick={(e) => handleCloseWindow(e, id)}
             >
               <FontAwesomeIcon icon={faWindowClose} />
             </button>

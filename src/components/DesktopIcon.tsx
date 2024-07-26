@@ -15,16 +15,27 @@ export default function DesktopIcon(props: any) {
     transform: CSS.Translate.toString(transform),
   };
 
+  function handleClick(e: any) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (props.selected) {
+      props.handleOpenWindow(props.id);
+    }
+  }
+
   return (
     <div
-      className={styles.icon}
+      onDoubleClick={(e) => handleClick(e)}
+      className={
+        styles.iconContainer + " " + (props.selected ? styles.selected : "")
+      }
       ref={setNodeRef}
       style={{ ...style, ...props.dragStyles }}
       {...attributes}
       {...listeners}
     >
-      <FontAwesomeIcon icon={faFile} />
-      <p>{props.title}</p>
+      <FontAwesomeIcon icon={props.icon} className={styles.icon} />
+      <p className={styles.iconText}>{props.title}</p>
     </div>
   );
 }

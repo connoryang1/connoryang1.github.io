@@ -21,10 +21,15 @@ export default function Navbar(props: any) {
     offset: ["end center", "end end"],
   });
 
+  const minimizedWindows = props.windows.filter(
+    (window: any) => window.minimized
+  );
+
+  const openWindows = props.windows.filter((window: any) => !window.minimized);
+
   const [showMinimized, setShowMinimized] = useState(true);
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(scrollYProgress.get());
     if (scrollYProgress.get() < 0.8) {
       setShowMinimized(false);
     } else {
@@ -39,15 +44,7 @@ export default function Navbar(props: any) {
   );
 
   const color = useTransform(scrollYProgress, [0, 0.9], ["#ffffff", "#242b38"]);
-
-  const numItems = 4 + props.minimizedWindows.length;
-  const navWidth = numItems * 2.5 * 2 - 2.5;
-
-  const width = useTransform(
-    scrollYProgress,
-    [0.5, 0.9],
-    ["90vw", `${navWidth}vw`]
-  );
+  const width = useTransform(scrollYProgress, [0.5, 0.9], [`20vw`, "90vw"]);
 
   return (
     <motion.div
@@ -66,24 +63,19 @@ export default function Navbar(props: any) {
             <FontAwesomeIcon icon={faHome} className={styles.navIcon} />
           </a>
         </li>
-        <li onClick={() => props.generateNewWindow()}>
+        <li onClick={() => props.generateRandomWindow()}>
           <FontAwesomeIcon icon={faPlus} className={styles.navIcon} />
         </li>
 
-        {showMinimized && props.minimizedWindows.length > 0 && (
-          <VerticalSeperator />
-        )}
+        {showMinimized && minimizedWindows.length > 0 && <VerticalSeperator />}
 
         {showMinimized &&
-          props.minimizedWindows.map((window: any) => (
+          minimizedWindows.map((window: any) => (
             <li
               key={window.id}
               onClick={() => props.setWindowActive(window.id)}
             >
-              <FontAwesomeIcon
-                icon={faWindowMinimize}
-                className={styles.navIcon}
-              />
+              <FontAwesomeIcon icon={window.icon} className={styles.navIcon} />
             </li>
           ))}
       </ul>

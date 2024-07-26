@@ -15,6 +15,8 @@ import {
   useTransform,
 } from "framer-motion";
 import DesktopIcon from "./DesktopIcon";
+import iconData from "@/data/iconData";
+import DesktopContent from "./DesktopContent";
 
 type DesktopProps = {
   windows: any[];
@@ -22,14 +24,6 @@ type DesktopProps = {
   setWindowActive: any;
   targetRef: any;
 };
-
-const iconData = [
-  {
-    id: "icon-1",
-    title: "Icon",
-    position: { x: 100, y: 100 },
-  },
-];
 
 export default function Desktop({
   windows,
@@ -53,7 +47,6 @@ export default function Desktop({
   const touchSensor = useSensor(TouchSensor);
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(scrollYProgress.get());
     if (scrollYProgress.get() < 0.8) {
       setCanInteract(false);
     } else {
@@ -63,6 +56,19 @@ export default function Desktop({
 
   function handleDragStart(event: any) {
     setWindowActive(event.active.id);
+
+    const icon = icons.find((icon) => icon.id === event.active.id);
+
+    if (icon) {
+      const _icons = icons.map((i) => {
+        if (i.id === icon.id) {
+          return { ...icon, selected: true };
+        }
+        return { ...i, selected: false };
+      });
+
+      setIcons(_icons);
+    }
   }
 
   function handleDragEnd(event: any) {
@@ -72,7 +78,6 @@ export default function Desktop({
     if (!(event.over && event.over.id == "desktop")) return;
 
     if (window) {
-      console.log("WINDOW: ", event.delta);
       window.position.x += event.delta.x;
       window.position.y += event.delta.y;
 
@@ -85,7 +90,6 @@ export default function Desktop({
 
       setWindows(_windows);
     } else if (icon) {
-      console.log("ICON: ", event.delta);
       icon.position.x += event.delta.x;
       icon.position.y += event.delta.y;
 
@@ -100,25 +104,6 @@ export default function Desktop({
     } else {
       alert("No window or icon found");
     }
-
-    console.log(window ? window : icon);
-  }
-
-  function closeWindow(event: any, id: string) {
-    event.stopPropagation();
-    const _windows = windows.filter((window) => window.id !== id);
-    setWindows(_windows);
-  }
-
-  function minimizeWindow(id: string) {
-    const _windows = windows.map((window) => {
-      if (window.id === id) {
-        return { ...window, minimized: true };
-      }
-      return window;
-    });
-
-    setWindows(_windows);
   }
 
   return (
@@ -133,40 +118,13 @@ export default function Desktop({
         sensors={[mouseSensor, touchSensor]}
         autoScroll={false}
       >
-        <Background>
-          <AnimatePresence>
-            {icons.map((icon) => (
-              <DesktopIcon
-                key={icon.id}
-                id={icon.id}
-                title={icon.title}
-                dragStyles={{
-                  position: "absolute",
-                  top: icon.position.y,
-                  left: icon.position.x,
-                }}
-              />
-            ))}
-            {windows
-              .filter((window) => !window.minimized)
-              .map((window) => (
-                <Window
-                  key={window.id}
-                  id={window.id}
-                  title={window.title}
-                  styles={{
-                    position: "absolute",
-                    top: window.position.y,
-                    left: window.position.x,
-                    zIndex: window.active ? 1 : 0,
-                  }}
-                  closeWindow={closeWindow}
-                  setWindowActive={setWindowActive}
-                  minimizeWindow={minimizeWindow}
-                />
-              ))}
-          </AnimatePresence>
-        </Background>
+        <DesktopContent
+          setWindowActive={setWindowActive}
+          windows={windows}
+          setWindows={setWindows}
+          icons={icons}
+          setIcons={setIcons}
+        />
       </DndContext>
     </motion.div>
   );

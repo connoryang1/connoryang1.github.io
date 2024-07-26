@@ -2,7 +2,7 @@
     height: 100vh;
     width: 100vw;
     background-color: #151820;
-    z-index: -2;
+    z-index: -100;
 
     outline: solid 1rem #7d899f;
 }
@@ -20,6 +20,12 @@
 
     height: 100vh;
     width: 100vw;
-    z-index: -1;
+    z-index: -99;
     object-fit: cover;
+}
+
+.background {
+    background: linear-gradient(to right, #66dfd3, #d9dcae 70%);
+    height: 100vh;
+    width: 100vw;
 }

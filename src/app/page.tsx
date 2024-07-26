@@ -1,39 +1,21 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Desktop from "@/components/Desktop";
 import Lenis from "lenis";
 import keyboards from "@/assets/keyboards.jpeg";
 import styles from "@/app/page.module.scss";
-import {
-  useScroll,
-  useTransform,
-  motion,
-  useMotionValueEvent,
-} from "framer-motion";
-import DesktopIcon from "@/components/DesktopIcon";
+import { useScroll, useTransform, motion } from "framer-motion";
 import Loading from "@/components/Loading";
+import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
-const windowData = [
-  {
-    id: "window-1",
-    title: "Welcome",
-    position: { x: 100, y: 100 },
-    active: true,
-    minimized: false,
-  },
-  {
-    id: "window-2",
-    title: "Window 2",
-    position: { x: 400, y: 400 },
-    active: false,
-    minimized: false,
-  },
-];
+import windowData from "@/data/windowData";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
+  const [loading, setLoading] = useState(false);
+
   const targetRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -41,16 +23,6 @@ export default function Home() {
     offset: ["end center", "end end"],
   });
   const opacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
-
-  const [loading, setLoading] = useState(true);
-
-  useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(scrollYProgress.get());
-  });
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 100);
-  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -81,9 +53,9 @@ export default function Home() {
             targetRef={targetRef}
           />
           <Navbar
-            generateNewWindow={generateNewWindow}
+            generateRandomWindow={generateRandomWindow}
             setWindowActive={setWindowActive}
-            minimizedWindows={windows.filter((window) => window.minimized)}
+            windows={windows}
             targetRef={targetRef}
           />
           <div style={{ height: "30rem" }}></div>
@@ -108,21 +80,17 @@ export default function Home() {
     setWindows(_windows);
   }
 
-  function generateNewWindow() {
+  function generateRandomWindow() {
     if (windows.length >= 10) {
       alert("You have reached the maximum number of windows.");
       return;
     }
 
-    const sortedWindows = windows.sort(
-      (a, b) => parseInt(a.id) - parseInt(b.id)
-    );
+    let id;
 
-    let id = String(sortedWindows.length + 1);
-
-    for (let i = 0; i < sortedWindows.length; i++) {
-      if (sortedWindows[i].id != "window-" + String(i + 1)) {
-        id = String(i + 1);
+    for (let i = 1; i < windows.length + 1; i++) {
+      if (!windows.find((window) => window.id === "window-" + String(i))) {
+        id = String(i);
         break;
       }
     }
@@ -137,6 +105,7 @@ export default function Home() {
         position: { x: randX, y: randY },
         active: true,
         minimized: false,
+        icon: faWindowRestore,
       },
     ];
     setWindows(_windows);
