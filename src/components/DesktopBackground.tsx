@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
-import styles from "./Background.module.scss";
+import styles from "./DesktopBackground.module.scss";
 
-export default function Background(props: any) {
+export default function DesktopBackground(props: any) {
   const { isOver, setNodeRef } = useDroppable({
     id: "desktop",
   });

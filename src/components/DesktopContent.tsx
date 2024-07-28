@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import Background from "./Background";
+import DesktopBackground from "./DesktopBackground";
 import DesktopIcon from "./DesktopIcon";
 import Window from "./Window";
 
@@ -47,7 +47,7 @@ export default function DesktopContent({
   }
 
   return (
-    <Background>
+    <DesktopBackground>
       <AnimatePresence>
         {icons.map((icon: any) => (
           <DesktopIcon
@@ -83,6 +83,6 @@ export default function DesktopContent({
             />
           ))}
       </AnimatePresence>
-    </Background>
+    </DesktopBackground>
   );
 }

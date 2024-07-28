@@ -12,6 +12,7 @@ import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
 import windowData from "@/data/windowData";
 import Projects from "@/components/Projects";
+import DesktopBackground from "@/components/DesktopBackground";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
@@ -54,6 +55,10 @@ export default function Home() {
               setWindowActive={setWindowActive}
               targetRef={targetRef}
             />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
           </Projects>
           <Navbar
             generateRandomWindow={generateRandomWindow}
