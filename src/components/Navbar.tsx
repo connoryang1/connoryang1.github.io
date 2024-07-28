@@ -40,7 +40,7 @@ export default function Navbar(props: any) {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.9],
-    ["#242b38", "#ffffff"]
+    ["#242b384b", "#ffffffaa"]
   );
 
   const color = useTransform(scrollYProgress, [0, 0.9], ["#ffffff", "#242b38"]);

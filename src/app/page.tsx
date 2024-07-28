@@ -58,7 +58,7 @@ export default function Home() {
             windows={windows}
             targetRef={targetRef}
           />
-          <div style={{ height: "30rem" }}></div>
+          <div style={{ height: "100rem" }}></div>
         </>
       )}
     </>

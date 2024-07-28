@@ -13,6 +13,8 @@ import {
   useMotionValueEvent,
   useScroll,
   useTransform,
+  easeIn,
+  cubicBezier,
 } from "framer-motion";
 import DesktopIcon from "./DesktopIcon";
 import iconData from "@/data/iconData";
@@ -39,9 +41,15 @@ export default function Desktop({
   const [canInteract, setCanInteract] = useState(true);
   const [icons, setIcons] = useState(iconData);
 
-  const scale = useTransform(scrollYProgress, [0, 0.9], ["40%", "100%"]);
-  const x = useTransform(scrollYProgress, [0, 0.9], ["20%", "0%"]);
-  const y = useTransform(scrollYProgress, [0, 0.9], ["60%", "0%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], ["40%", "100%"], {
+    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ["20%", "0%"], {
+    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["60%", "0%"], {
+    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+  });
 
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
