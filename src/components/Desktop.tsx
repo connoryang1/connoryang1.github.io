@@ -42,13 +42,13 @@ export default function Desktop({
   const [icons, setIcons] = useState(iconData);
 
   const scale = useTransform(scrollYProgress, [0, 1], ["40%", "100%"], {
-    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+    ease: easeIn,
   });
   const x = useTransform(scrollYProgress, [0, 1], ["20%", "0%"], {
-    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+    ease: easeIn,
   });
   const y = useTransform(scrollYProgress, [0, 1], ["60%", "0%"], {
-    ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+    ease: easeIn,
   });
 
   const mouseSensor = useSensor(MouseSensor);
