@@ -4,7 +4,6 @@ import {
   faHome,
   faInfoCircle,
   faPlus,
-  faWindowMinimize,
 } from "@fortawesome/free-solid-svg-icons";
 import VerticalSeperator from "./VerticalSeperator";
 import {

@@ -1,6 +1,5 @@
 import { useDroppable } from "@dnd-kit/core";
 import styles from "./Background.module.scss";
-import keyboards from "@/assets/keyboards.jpeg";
 
 export default function Background(props: any) {
   const { isOver, setNodeRef } = useDroppable({

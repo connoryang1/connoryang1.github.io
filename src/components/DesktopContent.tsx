@@ -8,7 +8,6 @@ export default function DesktopContent({
   windows,
   setWindows,
   icons,
-  setIcons,
 }: any) {
   function handleCloseWindow(event: any, id: string) {
     event.stopPropagation();

@@ -3,20 +3,9 @@ import styles from "./page.module.scss";
 import { DndContext, useSensor } from "@dnd-kit/core";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
-import Window from "@/components/Window";
-import Background from "@/components/Background";
 import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
-import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-  easeIn,
-  cubicBezier,
-} from "framer-motion";
-import DesktopIcon from "./DesktopIcon";
+import { useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import iconData from "@/data/iconData";
 import DesktopContent from "./DesktopContent";
 
