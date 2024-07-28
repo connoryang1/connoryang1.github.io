@@ -11,6 +11,7 @@ import Loading from "@/components/Loading";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
 import windowData from "@/data/windowData";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
@@ -46,12 +47,14 @@ export default function Home() {
           <motion.div className={styles.header} style={{ opacity }}>
             Hello. My name is Connor.
           </motion.div>
-          <Desktop
-            windows={windows}
-            setWindows={setWindows}
-            setWindowActive={setWindowActive}
-            targetRef={targetRef}
-          />
+          <Projects targetRef={targetRef}>
+            <Desktop
+              windows={windows}
+              setWindows={setWindows}
+              setWindowActive={setWindowActive}
+              targetRef={targetRef}
+            />
+          </Projects>
           <Navbar
             generateRandomWindow={generateRandomWindow}
             setWindowActive={setWindowActive}

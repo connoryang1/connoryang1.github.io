@@ -41,16 +41,6 @@ export default function Desktop({
   const [canInteract, setCanInteract] = useState(true);
   const [icons, setIcons] = useState(iconData);
 
-  const scale = useTransform(scrollYProgress, [0, 1], ["40%", "100%"], {
-    ease: easeIn,
-  });
-  const x = useTransform(scrollYProgress, [0, 1], ["20%", "0%"], {
-    ease: easeIn,
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["60%", "0%"], {
-    ease: easeIn,
-  });
-
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
 
@@ -117,7 +107,7 @@ export default function Desktop({
   return (
     <motion.div
       ref={targetRef}
-      style={{ scale, x, y, pointerEvents: canInteract ? "auto" : "none" }}
+      style={{ pointerEvents: canInteract ? "auto" : "none" }}
     >
       <DndContext
         onDragStart={handleDragStart}
