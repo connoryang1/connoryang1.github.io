@@ -13,6 +13,8 @@ html {
   scroll-behavior: smooth;
 
   background-color: #363c51;
+
+  overflow-x: hidden;
 }
 
 html.lenis, html.lenis body {
