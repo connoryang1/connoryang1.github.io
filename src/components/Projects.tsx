@@ -53,7 +53,8 @@ export default function Projects({ children, targetRef }: any) {
           style={
             activeIndex === index
               ? {
-                  outline: "2rem solid red",
+                  // outline: "2rem solid white",
+                  boxShadow: "0 0 50px 35px #a2d6f2",
                   zIndex: 1000,
                 }
               : { filter: "blur(1px) brightness(80%)" }

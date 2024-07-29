@@ -73,35 +73,30 @@ export default function Home() {
         stiffness: 3000,
       }}
     >
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {/* <img src={keyboards.src} className={styles.backgroundImage} /> */}
-          <motion.div className={styles.header} style={{ opacity }}>
-            Projects
-          </motion.div>
-          <Projects targetRef={targetRef}>
-            <Desktop
-              windows={windows}
-              setWindows={setWindows}
-              setWindowActive={setWindowActive}
-              targetRef={targetRef}
-            />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-          </Projects>
-          <Navbar
-            generateRandomWindow={generateRandomWindow}
-            setWindowActive={setWindowActive}
+      <div className={styles.container}>
+        <motion.div className={styles.header} style={{ opacity }}>
+          Projects
+        </motion.div>
+        <Projects targetRef={targetRef}>
+          <Desktop
             windows={windows}
+            setWindows={setWindows}
+            setWindowActive={setWindowActive}
             targetRef={targetRef}
           />
-          <div style={{ height: "100rem" }}></div>
-        </>
-      )}
+          <DesktopBackground targetRef={targetRef} />
+          <DesktopBackground targetRef={targetRef} />
+          <DesktopBackground targetRef={targetRef} />
+          <DesktopBackground targetRef={targetRef} />
+        </Projects>
+        <Navbar
+          generateRandomWindow={generateRandomWindow}
+          setWindowActive={setWindowActive}
+          windows={windows}
+          targetRef={targetRef}
+        />
+      </div>
+      <div style={{ height: "100rem" }}></div>
     </ScrollerMotion>
   );
 
