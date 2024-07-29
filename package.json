@@ -19,7 +19,8 @@
     "next": "14.2.3",
     "re-resizable": "^6.9.17",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "scroller-motion": "^1.2.3"
   },
   "devDependencies": {
     "@types/node": "^20",

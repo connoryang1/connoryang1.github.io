@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { useEffect, useRef, useState } from "react";
 import Desktop from "@/components/Desktop";
 import Lenis from "lenis";
+import { ScrollerMotion } from "scroller-motion";
 import keyboards from "@/assets/keyboards.jpeg";
 import styles from "@/app/page.module.scss";
 import { useScroll, useTransform, motion } from "framer-motion";
@@ -26,20 +27,52 @@ export default function Home() {
   });
   const opacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.5,
-    });
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     duration: 0.5,
+  //   });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+  //   function raf(time: number) {
+  //     lenis.raf(time);
+  //     requestAnimationFrame(raf);
+  //   }
 
-    requestAnimationFrame(raf);
-  });
+  //   requestAnimationFrame(raf);
+  // });
+
+  const projects = [
+    {
+      title: "Project 1",
+      technologies: ["React", "TypeScript", "Framer Motion"],
+      component: (
+        <Desktop
+          windows={windows}
+          setWindows={setWindows}
+          setWindowActive={setWindowActive}
+          targetRef={targetRef}
+        />
+      ),
+    },
+    {
+      title: "Project 2",
+      technologies: ["React", "TypeScript", "Framer Motion"],
+      component: <DesktopBackground targetRef={targetRef} />,
+    },
+    {
+      title: "Project 3",
+      technologies: ["React", "TypeScript", "Framer Motion"],
+      component: <DesktopBackground targetRef={targetRef} />,
+    },
+  ];
+
   return (
-    <>
+    <ScrollerMotion
+      spring={{
+        mass: 10,
+        damping: 500,
+        stiffness: 3000,
+      }}
+    >
       {loading ? (
         <Loading />
       ) : (
@@ -69,7 +102,7 @@ export default function Home() {
           <div style={{ height: "100rem" }}></div>
         </>
       )}
-    </>
+    </ScrollerMotion>
   );
 
   function setWindowActive(id: string) {
