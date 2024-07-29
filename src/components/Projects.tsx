@@ -1,11 +1,20 @@
 import styles from "@/components/Projects.module.scss";
-import { easeIn, useScroll, useTransform, motion } from "framer-motion";
+import {
+  easeIn,
+  useScroll,
+  useTransform,
+  motion,
+  useMotionValueEvent,
+} from "framer-motion";
+import { useState } from "react";
 
 export default function Projects({ children, targetRef }: any) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["end start", "end end"],
   });
+
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
     ease: easeIn,
@@ -22,13 +31,34 @@ export default function Projects({ children, targetRef }: any) {
     ease: easeIn,
   });
 
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    const index = Math.floor(((0.7 - scrollYProgress.get()) / 0.7) * 4);
+    console.log(index);
+    if (index !== activeIndex) {
+      setActiveIndex(index);
+    }
+  });
+
   return (
     <motion.div
       ref={targetRef}
       className={styles.projectContainer}
       style={{ scale, x, y }}
     >
-      {children}
+      {children.map((child: any, index: number) => (
+        <div
+          style={
+            activeIndex === index
+              ? {
+                  outline: "5rem solid red",
+                  zIndex: 1000,
+                }
+              : {}
+          }
+        >
+          {child}
+        </div>
+      ))}
     </motion.div>
   );
 }
