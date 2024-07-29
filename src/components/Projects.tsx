@@ -17,22 +17,25 @@ export default function Projects({ children, targetRef }: any) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
-    ease: easeIn,
+    // ease: easeIn,
   });
   const x = useTransform(
     scrollYProgress,
-    [0.1, 0.5, 0.7, 1],
+    [0.2, 0.5, 0.7, 1],
     ["-132%", "20%", "20%", "0%"],
     {
-      ease: easeIn,
+      // ease: easeIn,
     }
   );
   const y = useTransform(scrollYProgress, [0.5, 1], ["65%", "0%"], {
-    ease: easeIn,
+    // ease: easeIn,
   });
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    const index = Math.floor(((0.7 - scrollYProgress.get()) / 0.7) * 4);
+    const index = Math.max(
+      0,
+      Math.floor(((0.7 - scrollYProgress.get()) / 0.7) * 4)
+    );
     console.log(index);
     if (index !== activeIndex) {
       setActiveIndex(index);
@@ -50,11 +53,12 @@ export default function Projects({ children, targetRef }: any) {
           style={
             activeIndex === index
               ? {
-                  outline: "5rem solid red",
+                  outline: "2rem solid red",
                   zIndex: 1000,
                 }
-              : {}
+              : { filter: "blur(1px) brightness(80%)" }
           }
+          onMouseOver={() => setActiveIndex(index)}
         >
           {child}
         </div>

@@ -77,9 +77,9 @@ export default function Home() {
         <Loading />
       ) : (
         <>
-          <img src={keyboards.src} className={styles.backgroundImage} />
+          {/* <img src={keyboards.src} className={styles.backgroundImage} /> */}
           <motion.div className={styles.header} style={{ opacity }}>
-            Hello. My name is Connor.
+            Projects
           </motion.div>
           <Projects targetRef={targetRef}>
             <Desktop
