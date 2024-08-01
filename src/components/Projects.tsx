@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Projects({ children, targetRef }: any) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["end start", "end end"],
+    offset: ["end end", "start start"],
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,13 +21,13 @@ export default function Projects({ children, targetRef }: any) {
   });
   const x = useTransform(
     scrollYProgress,
-    [0.2, 0.5, 0.7, 1],
-    ["-132%", "20%", "20%", "0%"],
+    [0, 0.5, 0.7, 1],
+    ["-150%", "20%", "20%", "0%"],
     {
       // ease: easeIn,
     }
   );
-  const y = useTransform(scrollYProgress, [0.5, 1], ["65%", "0%"], {
+  const y = useTransform(scrollYProgress, [0.5, 1], ["10%", "0%"], {
     // ease: easeIn,
   });
 
@@ -36,24 +36,18 @@ export default function Projects({ children, targetRef }: any) {
       0,
       Math.floor(((0.7 - scrollYProgress.get()) / 0.7) * 4)
     );
-    console.log(index);
     if (index !== activeIndex) {
       setActiveIndex(index);
     }
   });
 
   return (
-    <motion.div
-      ref={targetRef}
-      className={styles.projectContainer}
-      style={{ scale, x, y }}
-    >
+    <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
       {children.map((child: any, index: number) => (
-        <div
+        <motion.div
           style={
             activeIndex === index
               ? {
-                  // outline: "2rem solid white",
                   boxShadow: "0 0 50px 35px #a2d6f2",
                   zIndex: 1000,
                 }
@@ -62,7 +56,7 @@ export default function Projects({ children, targetRef }: any) {
           onMouseOver={() => setActiveIndex(index)}
         >
           {child}
-        </div>
+        </motion.div>
       ))}
     </motion.div>
   );

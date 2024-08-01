@@ -7,7 +7,12 @@ import Lenis from "lenis";
 import { ScrollerMotion } from "scroller-motion";
 import keyboards from "@/assets/keyboards.jpeg";
 import styles from "@/app/page.module.scss";
-import { useScroll, useTransform, motion } from "framer-motion";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useMotionValueEvent,
+} from "framer-motion";
 import Loading from "@/components/Loading";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,22 +28,13 @@ export default function Home() {
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["end center", "end end"],
+    offset: ["end end", "start start"],
   });
-  const opacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]);
 
-  // useEffect(() => {
-  //   const lenis = new Lenis({
-  //     duration: 0.5,
-  //   });
-
-  //   function raf(time: number) {
-  //     lenis.raf(time);
-  //     requestAnimationFrame(raf);
-  //   }
-
-  //   requestAnimationFrame(raf);
-  // });
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    console.log(scrollYProgress.get());
+  });
 
   const projects = [
     {
@@ -66,29 +62,31 @@ export default function Home() {
   ];
 
   return (
-    <ScrollerMotion
-      spring={{
-        mass: 10,
-        damping: 500,
-        stiffness: 3000,
-      }}
-    >
-      <div className={styles.container}>
-        <motion.div className={styles.header} style={{ opacity }}>
-          Projects
-        </motion.div>
-        <Projects targetRef={targetRef}>
-          <Desktop
-            windows={windows}
-            setWindows={setWindows}
-            setWindowActive={setWindowActive}
-            targetRef={targetRef}
-          />
-          <DesktopBackground targetRef={targetRef} />
-          <DesktopBackground targetRef={targetRef} />
-          <DesktopBackground targetRef={targetRef} />
-          <DesktopBackground targetRef={targetRef} />
-        </Projects>
+    <>
+      <div className={styles.container} ref={targetRef}>
+        <section
+          style={{
+            position: "sticky",
+            height: "100vh",
+            top: "0",
+          }}
+        >
+          <motion.div className={styles.header} style={{ opacity }}>
+            Featured Projects
+          </motion.div>
+          <Projects targetRef={targetRef}>
+            <Desktop
+              windows={windows}
+              setWindows={setWindows}
+              setWindowActive={setWindowActive}
+              targetRef={targetRef}
+            />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
+            <DesktopBackground targetRef={targetRef} />
+          </Projects>
+        </section>
         <Navbar
           generateRandomWindow={generateRandomWindow}
           setWindowActive={setWindowActive}
@@ -96,8 +94,8 @@ export default function Home() {
           targetRef={targetRef}
         />
       </div>
-      <div style={{ height: "100rem" }}></div>
-    </ScrollerMotion>
+      <div style={{ height: "200rem" }}></div>
+    </>
   );
 
   function setWindowActive(id: string) {

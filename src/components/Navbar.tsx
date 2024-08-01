@@ -17,7 +17,7 @@ import { useState } from "react";
 export default function Navbar(props: any) {
   const { scrollYProgress } = useScroll({
     target: props.targetRef,
-    offset: ["end center", "end end"],
+    offset: ["end end", "start start"],
   });
 
   const minimizedWindows = props.windows.filter(
@@ -38,12 +38,16 @@ export default function Navbar(props: any) {
 
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, 0.9],
+    [0.6, 0.7],
     ["#242b384b", "#ffffffaa"]
   );
 
-  const color = useTransform(scrollYProgress, [0, 0.9], ["#ffffff", "#242b38"]);
-  const width = useTransform(scrollYProgress, [0.5, 0.9], [`20vw`, "90vw"]);
+  const color = useTransform(
+    scrollYProgress,
+    [0.6, 0.7],
+    ["#ffffff", "#242b38"]
+  );
+  const width = useTransform(scrollYProgress, [0.6, 0.7], [`20vw`, "90vw"]);
 
   return (
     <motion.div

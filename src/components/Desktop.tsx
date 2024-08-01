@@ -24,7 +24,7 @@ export default function Desktop({
 }: DesktopProps) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["end center", "end end"],
+    offset: ["start start", "end center"],
   });
 
   const [canInteract, setCanInteract] = useState(true);
@@ -34,7 +34,8 @@ export default function Desktop({
   const touchSensor = useSensor(TouchSensor);
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    if (scrollYProgress.get() < 0.8) {
+    console.log(canInteract);
+    if (scrollYProgress.get() > 0.8) {
       setCanInteract(false);
     } else {
       setCanInteract(true);
@@ -95,7 +96,7 @@ export default function Desktop({
 
   return (
     <motion.div
-      ref={targetRef}
+      // ref={targetRef}
       style={{ pointerEvents: canInteract ? "auto" : "none" }}
     >
       <DndContext
