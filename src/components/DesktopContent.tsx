@@ -71,6 +71,7 @@ export default function DesktopContent({
               key={window.id}
               id={window.id}
               title={window.title}
+              body={window.body}
               styles={{
                 position: "absolute",
                 top: window.position.y,

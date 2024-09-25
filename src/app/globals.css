@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +8,7 @@
   overscroll-behavior-y: none;
   scrollbar-width: none;
 
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {

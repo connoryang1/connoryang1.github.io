@@ -1,33 +1,19 @@
-import { faDoorOpen, faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import windowData from "./windowData";
 
 const iconData = [
   {
     id: "icon-1",
     title: "Welcome",
-    position: { x: 100, y: 100 },
+    position: { x: 70, y: 320 },
     selected: false,
-    window: {
-      id: "window-1",
-      title: "Welcome",
-      position: { x: 100, y: 100 },
-      active: true,
-      minimized: false,
-      icon: faDoorOpen,
-    },
+    window: windowData[0],
   },
   {
     id: "icon-2",
     title: "About Me",
-    position: { x: 100, y: 200 },
+    position: { x: 70, y: 420 },
     selected: false,
-    window: {
-      id: "window-2",
-      title: "About",
-      position: { x: 400, y: 400 },
-      active: false,
-      minimized: false,
-      icon: faAddressCard,
-    },
+    window: windowData[1],
   },
 ];
 

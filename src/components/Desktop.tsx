@@ -1,12 +1,11 @@
-import styles from "./page.module.scss";
 
 import { DndContext, useSensor } from "@dnd-kit/core";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
-import { useState } from "react";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import iconData from "@/data/iconData";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
 import DesktopContent from "./DesktopContent";
 
 type DesktopProps = {

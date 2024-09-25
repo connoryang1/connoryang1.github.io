@@ -26,9 +26,10 @@
 }
 
 .windowTitle {
-  color: #000000;
-  font-size: 1rem;
-  font-weight: 500;
+  color: #333333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: italic;
 }
 
 .windowControls {
@@ -40,7 +41,12 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: #000000;
+  color: #333333;
+}
+
+.windowControlIcon {
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .windowContent {
@@ -52,6 +58,6 @@
 .windowContentInner {
   display: flex;
   flex-direction: column;
-  color: #000000;
-  font-size: 0.9rem;
+  color: #333333;
+  font-size: 1.1rem;
 }

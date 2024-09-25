@@ -1,19 +1,15 @@
-import styles from "./Window.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faWindowClose,
-  faWindowMaximize,
-  faWindowMinimize,
-} from "@fortawesome/free-solid-svg-icons";
+import closeIcon from "@/assets/closeIcon.svg";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useAnimate, usePresence } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { height } from "@fortawesome/free-solid-svg-icons/fa0";
+import Image from "next/image";
+import { ReactNode, useEffect } from "react";
+import styles from "./Window.module.scss";
 
 type WindowProps = {
   id: string;
   title: string;
+  body: ReactNode;
   styles: any;
   handleCloseWindow: any;
   setWindowActive: any;
@@ -23,6 +19,7 @@ type WindowProps = {
 export default function Window({
   id,
   title,
+  body,
   styles: dragStyles,
   handleCloseWindow,
   setWindowActive,
@@ -68,7 +65,7 @@ export default function Window({
 
       exitAnimation();
     }
-  }, [isPresent]);
+  }, [isPresent, animate, safeToRemove, scope]);
 
   function handleMinimizeWindow(e: any, id: string) {
     e.preventDefault();
@@ -85,9 +82,9 @@ export default function Window({
     >
       <div ref={scope} className={styles.window}>
         <div className={styles.windowTitleBar} {...listeners} {...attributes}>
-          <div className={styles.windowTitle}>{title}</div>
+          <div className={styles.windowTitle}>{title.toUpperCase()}</div>
           <div className={styles.windowControls} data-no-dnd={true}>
-            <button
+            {/* <button
               className={styles.windowControl}
               onClick={(e) => handleMinimizeWindow(e, id)}
             >
@@ -95,21 +92,17 @@ export default function Window({
             </button>
             <button className={styles.windowControl}>
               <FontAwesomeIcon icon={faWindowMaximize} />
-            </button>
+            </button> */}
             <button
               className={styles.windowControl}
-              onClick={(e) => handleCloseWindow(e, id)}
-            >
-              <FontAwesomeIcon icon={faWindowClose} />
+              onClick={(e) => handleCloseWindow(e, id)}>
+              <Image src={closeIcon} alt="Close window" className={styles.windowControlIcon}/>
             </button>
           </div>
         </div>
         <div className={styles.windowContent}>
           <div className={styles.windowContentInner}>
-            <p>
-              This is a window. It has a title bar, controls, and content. It
-              can be moved around, resized, and closed. It's a window.
-            </p>
+            {body}
           </div>
         </div>
       </div>

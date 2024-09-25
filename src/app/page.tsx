@@ -1,28 +1,24 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import { useEffect, useRef, useState } from "react";
-import Desktop from "@/components/Desktop";
-import Lenis from "lenis";
-import { ScrollerMotion } from "scroller-motion";
-import keyboards from "@/assets/keyboards.jpeg";
 import styles from "@/app/page.module.scss";
+import Desktop from "@/components/Desktop";
 import {
-  useScroll,
-  useTransform,
   motion,
   useMotionValueEvent,
+  useScroll,
+  useTransform,
 } from "framer-motion";
-import Loading from "@/components/Loading";
+import { useEffect, useRef, useState } from "react";
+// import { motion as motion3d } from "framer-motion-3d";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
-import windowData from "@/data/windowData";
-import Projects from "@/components/Projects";
 import DesktopBackground from "@/components/DesktopBackground";
+import Projects from "@/components/Projects";
+import windowData from "@/data/windowData";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const targetRef = useRef(null);
 
@@ -36,65 +32,68 @@ export default function Home() {
     console.log(scrollYProgress.get());
   });
 
-  const projects = [
-    {
-      title: "Project 1",
-      technologies: ["React", "TypeScript", "Framer Motion"],
-      component: (
-        <Desktop
-          windows={windows}
-          setWindows={setWindows}
-          setWindowActive={setWindowActive}
-          targetRef={targetRef}
-        />
-      ),
-    },
-    {
-      title: "Project 2",
-      technologies: ["React", "TypeScript", "Framer Motion"],
-      component: <DesktopBackground targetRef={targetRef} />,
-    },
-    {
-      title: "Project 3",
-      technologies: ["React", "TypeScript", "Framer Motion"],
-      component: <DesktopBackground targetRef={targetRef} />,
-    },
-  ];
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
 
   return (
     <>
-      <div className={styles.container} ref={targetRef}>
-        <section
-          style={{
-            position: "sticky",
-            height: "100vh",
-            top: "0",
-          }}
+      <div className={`${styles.loadingScreen} ${!loading ? styles.hidden : ''}`}>
+        <motion.div
+          className={styles.loadingText}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <motion.div className={styles.header} style={{ opacity }}>
-            Featured Projects
-          </motion.div>
-          <Projects targetRef={targetRef}>
-            <Desktop
-              windows={windows}
-              setWindows={setWindows}
-              setWindowActive={setWindowActive}
-              targetRef={targetRef}
-            />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-            <DesktopBackground targetRef={targetRef} />
-          </Projects>
-        </section>
-        <Navbar
-          generateRandomWindow={generateRandomWindow}
-          setWindowActive={setWindowActive}
-          windows={windows}
-          targetRef={targetRef}
-        />
+          Almost there...
+        </motion.div>
       </div>
-      <div style={{ height: "200rem" }}></div>
+      <div style={{
+        display: loading ? "none" : "block",
+      }}>
+        <div className={styles.container} ref={targetRef}>
+          <section
+            style={{
+              position: "sticky",
+              height: "100vh",
+              top: "0",
+            }}
+          >
+            <motion.div className={styles.header} style={{ opacity }}>
+              Featured Projects
+            </motion.div>
+            <Projects targetRef={targetRef}>
+              <Desktop
+                windows={windows}
+                setWindows={setWindows}
+                setWindowActive={setWindowActive}
+                targetRef={targetRef}
+              />
+              <DesktopBackground targetRef={targetRef} />
+              <DesktopBackground targetRef={targetRef} />
+              <DesktopBackground targetRef={targetRef} />
+              <DesktopBackground targetRef={targetRef} />
+            </Projects>
+          </section>
+          {/* <Navbar
+            generateRandomWindow={generateRandomWindow}
+            setWindowActive={setWindowActive}
+            windows={windows}
+            targetRef={targetRef}
+          /> */}
+        </div>
+        <div className={styles.header}>Work Experience</div>
+        <div style={{ height: "20rem" }}></div>
+        <div className={styles.header}>Education</div>
+
+        <div style={{ height: "200rem" }}></div>
+      </div>
     </>
   );
 
@@ -136,6 +135,7 @@ export default function Home() {
       {
         id: "window-" + id,
         title: "Window " + id,
+        body: <div>Window {id}</div>,
         position: { x: randX, y: randY },
         active: true,
         minimized: false,

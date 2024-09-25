@@ -1,18 +1,18 @@
-import styles from "./Navbar.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faInfoCircle,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import VerticalSeperator from "./VerticalSeperator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  useScroll,
-  useTransform,
   motion,
   useMotionValueEvent,
+  useScroll,
+  useTransform,
 } from "framer-motion";
 import { useState } from "react";
+import styles from "./Navbar.module.scss";
+import VerticalSeperator from "./VerticalSeperator";
 
 export default function Navbar(props: any) {
   const { scrollYProgress } = useScroll({
