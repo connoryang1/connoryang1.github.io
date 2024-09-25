@@ -9,7 +9,7 @@ export default function DesktopBackground(props: any) {
   });
 
   return (
-    <div ref={setNodeRef} className={styles.desktop}>
+    <div ref={setNodeRef} className={styles.desktop} onClick={props.onClick}>
       <Image fill={true} src={bg.src} alt="Desktop background" className={styles.image} />
       {props.children}
     </div>

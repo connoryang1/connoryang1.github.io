@@ -49,26 +49,18 @@ export default function Projects({ children, targetRef }: any) {
             activeIndex === index
               ? {
                   // boxShadow: "0 0 50px 35px #a2d6f2",
-                  zIndex: 1000,
+                  zIndex: 50 - index,
                   // marginRight: "70vw",
                   transition: "all 0.5s",
                 }
-              : activeIndex > index
-              ? {
+              : {
                   // filter: "blur(1px) brightness(80%)",
                   // rotateY: "-30deg",
                   // rotateX: "-15deg",
                   transition: "all 0.5s",
                   // marginLeft: "-70vw",
-                  zIndex: index,
-                }
-              : {
-                  // filter: "blur(1px) brightness(80%)",
-                  // rotateY: "30deg",
-                  // rotateX: "-15deg",
-                  transition: "all 0.5s",
-                  // marginLeft: "-70vw",
                   zIndex: 50 - index,
+                  // zIndex: 1000,
                 }
           }
           onMouseOver={() => setActiveIndex(index)}

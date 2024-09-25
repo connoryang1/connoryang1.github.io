@@ -7,6 +7,7 @@ export default function DesktopContent({
   setWindowActive,
   windows,
   setWindows,
+  setIcons,
   icons,
 }: any) {
   function handleCloseWindow(event: any, id: string) {
@@ -47,16 +48,21 @@ export default function DesktopContent({
   }
 
   return (
-    <DesktopBackground>
+    <DesktopBackground onClick={() => {
+        const _icons = icons.map((icon: any) => {
+          return { ...icon, selected: false };
+        });
+        setIcons(_icons);
+    }}>
       <AnimatePresence>
         {icons.map((icon: any) => (
           <DesktopIcon
             key={icon.id}
             id={icon.id}
             title={icon.title}
-            icon={icon.window.icon}
+            icon={icon.window ? icon.window.icon : icon.icon}
             selected={icon.selected}
-            handleOpenWindow={handleOpenWindow}
+            handleOpenWindow={icon.window ? handleOpenWindow : () => window.open(icon.link)?.focus()}
             dragStyles={{
               position: "absolute",
               top: icon.position.y,
