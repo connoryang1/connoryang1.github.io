@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
 import DesktopBackground from "@/components/DesktopBackground";
+import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
 import windowData from "@/data/windowData";
 
@@ -81,12 +82,12 @@ export default function Home() {
               <DesktopBackground targetRef={targetRef} />
             </Projects>
           </section>
-          {/* <Navbar
+          <Navbar
             generateRandomWindow={generateRandomWindow}
             setWindowActive={setWindowActive}
             windows={windows}
             targetRef={targetRef}
-          /> */}
+          />
         </div>
         <div className={styles.header}>Work Experience</div>
         <div style={{ height: "20rem" }}></div>

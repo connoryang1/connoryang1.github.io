@@ -1,10 +1,4 @@
 import {
-  faHome,
-  faInfoCircle,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
   motion,
   useMotionValueEvent,
   useScroll,
@@ -12,7 +6,6 @@ import {
 } from "framer-motion";
 import { useState } from "react";
 import styles from "./Navbar.module.scss";
-import VerticalSeperator from "./VerticalSeperator";
 
 export default function Navbar(props: any) {
   const { scrollYProgress } = useScroll({
@@ -49,39 +42,18 @@ export default function Navbar(props: any) {
   );
   const width = useTransform(scrollYProgress, [0.6, 0.7], [`20vw`, "90vw"]);
 
+  const opacity = useTransform(scrollYProgress, [0.7, 0.8], [1, 0]);
+
   return (
     <motion.div
       className={styles.navbar}
-      style={{ backgroundColor, width, color }}
+      style={{ opacity }}
     >
-      <ul className={styles.navItems}>
-        <li>
-          <a href="/about">
-            <FontAwesomeIcon icon={faInfoCircle} className={styles.navIcon} />
-          </a>
-        </li>
-        <VerticalSeperator />
-        <li>
-          <a href="/">
-            <FontAwesomeIcon icon={faHome} className={styles.navIcon} />
-          </a>
-        </li>
-        <li onClick={() => props.generateRandomWindow()}>
-          <FontAwesomeIcon icon={faPlus} className={styles.navIcon} />
-        </li>
-
-        {showMinimized && minimizedWindows.length > 0 && <VerticalSeperator />}
-
-        {showMinimized &&
-          minimizedWindows.map((window: any) => (
-            <li
-              key={window.id}
-              onClick={() => props.setWindowActive(window.id)}
-            >
-              <FontAwesomeIcon icon={window.icon} className={styles.navIcon} />
-            </li>
-          ))}
-      </ul>
+      <ol className={styles.navItems}>
+        <li className={styles.navText}>Home</li>
+        <li className={styles.navText}>About</li>
+        <li className={styles.navText}>Resume</li>
+      </ol>
     </motion.div>
   );
 }
