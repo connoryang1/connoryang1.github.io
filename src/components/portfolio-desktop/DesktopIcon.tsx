@@ -1,4 +1,4 @@
-import styles from "@/components/DesktopIcon.module.scss";
+import styles from "@/components/portfolio-desktop/DesktopIcon.module.scss";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import Image from 'next/image';

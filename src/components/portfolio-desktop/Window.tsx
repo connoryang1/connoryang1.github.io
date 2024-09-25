@@ -1,10 +1,10 @@
 import closeIcon from "@/assets/icons/closeIcon.svg";
+import styles from "@/components/portfolio-desktop/Window.module.scss";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useAnimate, usePresence } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useEffect } from "react";
-import styles from "./Window.module.scss";
 
 type WindowProps = {
   id: string;

@@ -1,6 +1,6 @@
+import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground";
+import DesktopIcon from "@/components/portfolio-desktop/DesktopIcon";
 import { AnimatePresence } from "framer-motion";
-import DesktopBackground from "./DesktopBackground";
-import DesktopIcon from "./DesktopIcon";
 import Window from "./Window";
 
 export default function DesktopContent({

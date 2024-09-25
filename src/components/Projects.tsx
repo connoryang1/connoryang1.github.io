@@ -1,11 +1,10 @@
 import styles from "@/components/Projects.module.scss";
 import {
   motion,
-  useMotionValueEvent,
   useScroll,
-  useTransform,
+  useTransform
 } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Projects({ children, targetRef }: any) {
   const { scrollYProgress } = useScroll({
@@ -30,38 +29,20 @@ export default function Projects({ children, targetRef }: any) {
     // ease: easeIn,
   });
 
-  useMotionValueEvent(scrollYProgress, "change", () => {
-    const index = Math.max(
-      0,
-      Math.floor(((0.4 - scrollYProgress.get()) / 0.3) * 4)
-    );
-    if (index !== activeIndex) {
-      setActiveIndex(index);
-    }
-  });
-
   return (
     <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
-      {children.map((child: any, index: number) => (
+      {React.Children.map(children, (child: any, index: number) => (
         <motion.div
           key={index}
           style={
             activeIndex === index
               ? {
-                  // boxShadow: "0 0 50px 35px #a2d6f2",
-                  zIndex: 50 - index,
-                  // marginRight: "70vw",
                   transition: "all 0.5s",
                 }
               : {
-                  // filter: "blur(1px) brightness(80%)",
-                  // rotateY: "-30deg",
-                  // rotateX: "-15deg",
                   transition: "all 0.5s",
-                  // marginLeft: "-70vw",
-                  zIndex: 50 - index,
-                  // zIndex: 1000,
-                }
+                  filter: "brightness(0.5)",
+                 }
           }
           onMouseOver={() => setActiveIndex(index)}
         >

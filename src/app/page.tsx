@@ -1,18 +1,15 @@
 "use client";
 
 import styles from "@/app/page.module.scss";
-import Desktop from "@/components/Desktop";
+import Desktop from "@/components/portfolio-desktop/Desktop";
+import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 import {
   motion,
-  useMotionValueEvent,
   useScroll,
-  useTransform,
+  useTransform
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-// import { motion as motion3d } from "framer-motion-3d";
-import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
-import DesktopBackground from "@/components/DesktopBackground";
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
 import windowData from "@/data/windowData";
@@ -28,10 +25,6 @@ export default function Home() {
     offset: ["end end", "start start"],
   });
   const opacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]);
-
-  useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(scrollYProgress.get());
-  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -75,11 +68,8 @@ export default function Home() {
                 setWindows={setWindows}
                 setWindowActive={setWindowActive}
                 targetRef={targetRef}
+                homeScrollProgress={scrollYProgress}
               />
-              <DesktopBackground targetRef={targetRef} />
-              <DesktopBackground targetRef={targetRef} />
-              <DesktopBackground targetRef={targetRef} />
-              <DesktopBackground targetRef={targetRef} />
             </Projects>
           </section>
           <Navbar

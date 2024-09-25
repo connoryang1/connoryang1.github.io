@@ -3,16 +3,17 @@ import { DndContext, useSensor } from "@dnd-kit/core";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 import { MouseSensor, TouchSensor } from "@/app/sensors/Sensor";
+import DesktopContent from "@/components/portfolio-desktop/DesktopContent";
 import iconData from "@/data/iconData";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
-import DesktopContent from "./DesktopContent";
 
 type DesktopProps = {
   windows: any[];
   setWindows: any;
   setWindowActive: any;
   targetRef: any;
+  homeScrollProgress: any;
 };
 
 export default function Desktop({
@@ -20,6 +21,7 @@ export default function Desktop({
   setWindows,
   setWindowActive,
   targetRef,
+  homeScrollProgress
 }: DesktopProps) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -33,11 +35,11 @@ export default function Desktop({
   const touchSensor = useSensor(TouchSensor);
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(canInteract);
-    if (scrollYProgress.get() > 0.8) {
-      setCanInteract(false);
-    } else {
+    console.log(canInteract, homeScrollProgress.get());
+    if (homeScrollProgress.get() > 0.9) {
       setCanInteract(true);
+    } else {
+      setCanInteract(false);
     }
   });
 

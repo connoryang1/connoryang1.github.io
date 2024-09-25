@@ -14,7 +14,7 @@ const windowData = [
       <li>Welcome to my portfolio website!</li>
       <li>Drag windows around or click the &quot;X&quot; icon to close them.</li>
       <li>Open new windows using desktop icons.</li>
-      <li>Scroll down to view more!</li>
+      <li><b>Scroll down to view more!</b></li>
     </ul>,
     position: { x: 675, y: 320 },
     size: { width: 280, height: 250 },
