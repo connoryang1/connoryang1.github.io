@@ -19,10 +19,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  // background-color: #343e4f;
+  padding: 0.7rem 1rem 0.4rem;
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .windowTitle {
@@ -59,5 +60,6 @@
   display: flex;
   flex-direction: column;
   color: #333333;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
 }

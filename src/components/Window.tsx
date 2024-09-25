@@ -1,4 +1,4 @@
-import closeIcon from "@/assets/closeIcon.svg";
+import closeIcon from "@/assets/icons/closeIcon.svg";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useAnimate, usePresence } from "framer-motion";
@@ -11,6 +11,7 @@ type WindowProps = {
   title: string;
   body: ReactNode;
   styles: any;
+  size: any;
   handleCloseWindow: any;
   setWindowActive: any;
   handleMinimizeWindow: any;
@@ -20,6 +21,7 @@ export default function Window({
   id,
   title,
   body,
+  size,
   styles: dragStyles,
   handleCloseWindow,
   setWindowActive,
@@ -80,7 +82,10 @@ export default function Window({
       onClick={() => setWindowActive(id)}
       style={{ ...style, ...dragStyles }}
     >
-      <div ref={scope} className={styles.window}>
+      <div ref={scope} className={styles.window} style={{
+        width: size.width,
+        height: size.height,
+      }}>
         <div className={styles.windowTitleBar} {...listeners} {...attributes}>
           <div className={styles.windowTitle}>{title.toUpperCase()}</div>
           <div className={styles.windowControls} data-no-dnd={true}>

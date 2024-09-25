@@ -137,6 +137,7 @@ export default function Home() {
         id: "window-" + id,
         title: "Window " + id,
         body: <div>Window {id}</div>,
+        size: { width: 400, height: 400 },
         position: { x: randX, y: randY },
         active: true,
         minimized: false,
