@@ -20,7 +20,7 @@ export default function Projects({ children, targetRef }: any) {
   const x = useTransform(
     scrollYProgress,
     [0, 0.5, 0.7, 1],
-    ["-150%", "20%", "20%", "0%"],
+    ["-115%", "20%", "20%", "0%"],
     {
       // ease: easeIn,
     }
