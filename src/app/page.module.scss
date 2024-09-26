@@ -11,13 +11,16 @@
   // z-index: -1;
   position: absolute;
 
-  margin-left: 10vh;
-  margin-top: 20vh;
+  margin: 20vh 0;
 
   color: white;
   font-size: 4rem;
   text-transform: uppercase;
   font-style: italic;
+
+  text-align: end;
+
+  width: 100vw;
 }
 
 .container {

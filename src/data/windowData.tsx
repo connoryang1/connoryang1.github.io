@@ -16,7 +16,7 @@ const windowData = [
       <li>Open new windows using desktop icons.</li>
       <li><b>Scroll down to view more!</b></li>
     </ul>,
-    position: { x: 675, y: 320 },
+    position: { x: 775, y: 320 },
     size: { width: 280, height: 250 },
     active: true,
     minimized: false,
@@ -45,7 +45,7 @@ const windowData = [
           fontSize: "0.7rem",
         }}>
           <li>Software Developer Intern at <b>QualRisk</b>.</li>
-          <li>Research at the Zaman E3 Lab.</li>
+          <li>Researcher at the Zaman E3 Lab.</li>
           <li>Full-time student: EECS 485, EECS 376, EECS 370, STATS 401, ENGR 455, ALA 380</li>
         </ul>
       </li>
@@ -55,7 +55,7 @@ const windowData = [
 
       </ul>
     </div>,
-    position: { x: 950, y: 70 },
+    position: { x: 1050, y: 70 },
     size: { width: 320, height: 470 },
     active: false,
     minimized: false,

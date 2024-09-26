@@ -1,6 +1,7 @@
 import styles from "@/components/Projects.module.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
-import React, { useEffect } from "react";
+import { redirect } from "next/navigation";
+import React from "react";
 
 export default function Projects({
   children,
@@ -13,10 +14,6 @@ export default function Projects({
     offset: ["end end", "start start"],
   });
 
-  useEffect(() => {
-    console.log(children);
-  } , [children]);
-
   const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
     // ease: easeIn,
   });
@@ -28,7 +25,7 @@ export default function Projects({
       // ease: easeIn,
     }
   );
-  const y = useTransform(scrollYProgress, [0.5, 1], ["20%", "0%"], {
+  const y = useTransform(scrollYProgress, [0.5, 1], ["25%", "0%"], {
     // ease: easeIn,
   });
 
@@ -38,6 +35,7 @@ export default function Projects({
         {React.Children.map(children, (child: any, index: number) => (
           <motion.div
             key={index}
+            onClick={() => child.props.link && redirect('/projects')}
             style={
               activeIndex === index
                 ? {

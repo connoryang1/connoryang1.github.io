@@ -4,7 +4,7 @@ import styles from "@/app/page.module.scss";
 import Desktop from "@/components/portfolio-desktop/Desktop";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
@@ -42,11 +42,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    // console.log(projects);
-    console.log(activeIndex);
-  }, [activeIndex]);
-
   return (
     <>
       <div
@@ -75,11 +70,19 @@ export default function Home() {
             }}
           >
             <motion.div className={styles.header} style={{ opacity }}>
-              Recent Works
+              <h1 style={{
+                fontSize: "4rem",
+                textTransform: "uppercase",
+                fontStyle: "italic",
+                fontWeight: 500,
+                marginRight: "3rem",
+              }}>Recent Works</h1>
               <div
                 style={{
                   fontSize: "2rem",
-                  paddingTop: "1rem",
+                  marginTop: "5.5rem",
+                  textAlign: "start",
+                  marginLeft: "3rem",
                 }}
               >
                 <b>
@@ -91,6 +94,7 @@ export default function Home() {
                 <p style={{
                   fontSize: "1.5rem",
                   textTransform: "none",
+                  marginBottom: "1rem",
                 }}>
                   {projects &&
                     projects.length > activeIndex &&
@@ -106,9 +110,10 @@ export default function Home() {
                       key={tech}
                       style={{
                         fontSize: "1rem",
-                        fontStyle: "italic",
                         marginRight: "1rem",
-                        color: "#999999",
+                        color: "#CCCCCC",
+                        backgroundColor: "rgba(80, 80, 80, 0.5)",
+                        padding: "0.2rem 0.5rem",
                       }}
                     >
                       {tech}
@@ -130,7 +135,9 @@ export default function Home() {
                 homeScrollProgress={scrollYProgress}
               />
               {projectData.map((project: any) => (
-                project.content && project.content
+                project.content && React.cloneElement(project.content, {
+                  link: project.link,
+                })
               ))}
             </Projects>
           </section>

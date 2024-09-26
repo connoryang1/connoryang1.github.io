@@ -20,14 +20,14 @@ export default function Navbar(props: any) {
       style={{ opacity }}
     >
       <ol className={styles.navItems}>
-        <li className={styles.navText}>
-          <Link href="/">Connor Yang</Link>
+        <li>
+          <Link className={styles.navText} href="/">Connor Yang</Link>
         </li>
-        <li className={styles.navText}>
-          <Link href="/about">About</Link>
+        <li>
+          <Link className={styles.navText} href="/about">About</Link>
         </li>
-        <li className={styles.navText}>
-          <Link href="/projects">Projects</Link>
+        <li>
+          <Link className={styles.navText} href="/projects">Projects</Link>
         </li>
       </ol>
     </motion.div>
