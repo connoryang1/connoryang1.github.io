@@ -36,6 +36,9 @@ export default function Projects({
           const commonStyles = {
             transition: "all 0.5s",
             filter: activeIndex === index ? "brightness(1)" : "brightness(0.5)",
+            outline: "4px solid #ffffff",
+            height: "100vh",
+            width: "100vw",
           };
 
           const motionDiv = (

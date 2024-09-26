@@ -80,7 +80,7 @@ export default function Home() {
               <div
                 style={{
                   fontSize: "2rem",
-                  marginTop: "5.5rem",
+                  marginTop: "3.5rem",
                   textAlign: "start",
                   marginLeft: "3rem",
                 }}

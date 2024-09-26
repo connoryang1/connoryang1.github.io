@@ -1,12 +1,15 @@
+import wolverineSoft from "@/assets/wolverinesoft.webp";
 import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground";
+import Image from "next/image";
 
 const projectData = [
   {
     title: "WolverineSoft",
     description: "DevBlog for WolverineSoft Studio.",
-    content: <DesktopBackground />,
+    content: <div>Hi<Image src={wolverineSoft.src} alt="WolverineSoft Logo" fill={true} style={{
+      objectFit: "cover",
+    }}/></div>,
     link: "/projects/wolverinesoft",
-    // technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "M-Clubs",
@@ -17,11 +20,12 @@ const projectData = [
   },
   {
     title: "DStream",
-    description: "A multi-language compatible stream curation algorithm library.",
+    description:
+      "A multi-language compatible stream curation algorithm library.",
     content: <DesktopBackground />,
     link: "/projects/dstream",
     technologies: ["Python", "C++", "Rust"],
-  }
+  },
 ];
 
-export default projectData
+export default projectData;
