@@ -1,6 +1,7 @@
 export async function generateStaticParams() {
-  return [];
-}
+  return {
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+  }}
 
 export default function Page() {
   return (
