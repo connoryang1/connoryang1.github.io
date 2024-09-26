@@ -14,25 +14,17 @@ export default function Projects({
     offset: ["end end", "start start"],
   });
 
-
   useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(scrollYProgress.get());
+    console.log(scrollYProgress.get(), targetRef.current, targetRef.current?.offsetHeight);
   });
 
-  const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
-    // ease: easeIn,
-  });
+  const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"]);
   const x = useTransform(
     scrollYProgress,
     [0, 0.5, 0.7, 1],
     ["-115%", "20%", "20%", "0%"],
-    {
-      // ease: easeIn,
-    }
   );
-  const y = useTransform(scrollYProgress, [0.5, 1], ["25%", "0%"], {
-    // ease: easeIn,
-  });
+  const y = useTransform(scrollYProgress, [0.5, 1], ["25%", "0%"]);
 
   return (
     <div>
