@@ -1,7 +1,7 @@
 import styles from "@/components/Projects.module.scss";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 export default function Projects({
   children,
@@ -14,9 +14,12 @@ export default function Projects({
     offset: ["end end", "start start"],
   });
 
-  useEffect(() => {
-    console.log(scrollYProgress);
-  }, [scrollYProgress]);
+  const [prog, setProg] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    setProg(scrollYProgress.get());
+    console.log(scrollYProgress.get());
+  });
 
   const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
     // ease: easeIn,
@@ -36,6 +39,10 @@ export default function Projects({
   return (
     <div>
       <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
+        <p style={{
+          fontSize: "4rem",
+          color: "#ffffff",
+        }}>{prog}</p>
         {React.Children.map(children, (child: any, index: number) => {
           const commonStyles = {
             transition: "all 0.5s",
