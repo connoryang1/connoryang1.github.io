@@ -1,5 +1,8 @@
 export async function generateStaticParams() {
-  return {}
+  return {
+    paths: [],
+    fallback: false,
+  };
 }
 
 export default function Page() {
