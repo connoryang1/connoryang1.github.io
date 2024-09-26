@@ -75,7 +75,7 @@ export default function Home() {
                 textTransform: "uppercase",
                 fontStyle: "italic",
                 fontWeight: 500,
-                marginRight: "3rem",
+                marginLeft: "3rem",
               }}>Recent Works</h1>
               <div
                 style={{
