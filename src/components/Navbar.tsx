@@ -29,19 +29,6 @@ export default function Navbar(props: any) {
     }
   });
 
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    [0.6, 0.7],
-    ["#242b384b", "#ffffffaa"]
-  );
-
-  const color = useTransform(
-    scrollYProgress,
-    [0.6, 0.7],
-    ["#ffffff", "#242b38"]
-  );
-  const width = useTransform(scrollYProgress, [0.6, 0.7], [`20vw`, "90vw"]);
-
   const opacity = useTransform(scrollYProgress, [0.7, 0.8], [1, 0]);
 
   return (

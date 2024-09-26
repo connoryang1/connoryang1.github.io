@@ -1,4 +1,4 @@
-import bg from "@/assets/bg.png";
+import bg from "@/assets/bg.webp";
 import styles from "@/components/portfolio-desktop/DesktopBackground.module.scss";
 import { useDroppable } from "@dnd-kit/core";
 import Image from "next/image";

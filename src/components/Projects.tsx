@@ -25,12 +25,13 @@ export default function Projects({ children, targetRef }: any) {
       // ease: easeIn,
     }
   );
-  const y = useTransform(scrollYProgress, [0.5, 1], ["10%", "0%"], {
+  const y = useTransform(scrollYProgress, [0.5, 1], ["20%", "0%"], {
     // ease: easeIn,
   });
 
   return (
-    <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
+    <div>
+      <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
       {React.Children.map(children, (child: any, index: number) => (
         <motion.div
           key={index}
@@ -38,6 +39,7 @@ export default function Projects({ children, targetRef }: any) {
             activeIndex === index
               ? {
                   transition: "all 0.5s",
+                  filter: "brightness(1)",
                 }
               : {
                   transition: "all 0.5s",
@@ -49,6 +51,28 @@ export default function Projects({ children, targetRef }: any) {
           {child}
         </motion.div>
       ))}
+      <div style={{
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        outline: "4px solid #000000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingLeft: "15rem",
+        paddingRight: "15rem",
+      }}>
+        <a style={{
+          color: "#999999",
+          cursor: "pointer",
+          transition: "all 0.5s",
+          fontSize: "4rem",
+          whiteSpace: "nowrap",
+        }}
+          href="/projects"
+        >
+          View all -&gt;
+        </a>
+      </div>
     </motion.div>
+    </div>
   );
 }

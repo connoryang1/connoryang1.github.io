@@ -3,14 +3,11 @@
 import styles from "@/app/page.module.scss";
 import Desktop from "@/components/portfolio-desktop/Desktop";
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
-import {
-  motion,
-  useScroll,
-  useTransform
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import Navbar from "@/components/Navbar";
+import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground";
 import Projects from "@/components/Projects";
 import windowData from "@/data/windowData";
 
@@ -34,11 +31,11 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-
-
   return (
     <>
-      <div className={`${styles.loadingScreen} ${!loading ? styles.hidden : ''}`}>
+      <div
+        className={`${styles.loadingScreen} ${!loading ? styles.hidden : ""}`}
+      >
         <motion.div
           className={styles.loadingText}
           initial={{ opacity: 0 }}
@@ -48,9 +45,11 @@ export default function Home() {
           Almost there...
         </motion.div>
       </div>
-      <div style={{
-        display: loading ? "none" : "block",
-      }}>
+      <div
+        style={{
+          display: loading ? "none" : "block",
+        }}
+      >
         <div className={styles.container} ref={targetRef}>
           <section
             style={{
@@ -60,8 +59,17 @@ export default function Home() {
             }}
           >
             <motion.div className={styles.header} style={{ opacity }}>
-              Featured Projects
+              Recent Works
+              <div
+                style={{
+                  fontSize: "2rem",
+                  paddingTop: "1rem",
+                }}
+              >
+                <b>Portfolio Website</b>
+              </div>
             </motion.div>
+
             <Projects targetRef={targetRef}>
               <Desktop
                 windows={windows}
@@ -70,6 +78,9 @@ export default function Home() {
                 targetRef={targetRef}
                 homeScrollProgress={scrollYProgress}
               />
+              <DesktopBackground />
+              <DesktopBackground />
+              <DesktopBackground />
             </Projects>
           </section>
           <Navbar
