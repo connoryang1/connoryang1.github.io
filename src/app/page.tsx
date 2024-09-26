@@ -13,7 +13,7 @@ import windowData from "@/data/windowData";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [projects, setProjects] = useState<any[]>([]);
 
