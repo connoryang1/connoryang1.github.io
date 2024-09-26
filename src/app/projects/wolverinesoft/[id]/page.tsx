@@ -1,7 +1,7 @@
-// export async function generateStaticParams() {
-//   return [{ eventId: "1" }, { eventId: "2"}];
-// }
+export function generateStaticParams() {
+  return [{ id: "test" }];
+}
 
-export default function Page({ params }: { params: { slug: string } }) {
-  return <div>My Post: {params.slug}</div>;
+export default async function Page(props: any) {
+  return <div>{JSON.stringify(props.params)}</div>;
 }
