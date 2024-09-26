@@ -23,7 +23,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/connoryang1.github.io/' : '',
+  assetPrefix: '/connoryang1.github.io',
 };
 
 export default nextConfig;
