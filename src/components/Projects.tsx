@@ -1,6 +1,6 @@
 import styles from "@/components/Projects.module.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 import React from "react";
 
 export default function Projects({
@@ -32,28 +32,33 @@ export default function Projects({
   return (
     <div>
       <motion.div className={styles.projectContainer} style={{ scale, x, y }}>
-        {React.Children.map(children, (child: any, index: number) => (
-          <motion.div
-            key={index}
-            onClick={() => child.props.link && redirect('/projects')}
-            style={
-              activeIndex === index
-                ? {
-                    transition: "all 0.5s",
-                    filter: "brightness(1)",
-                    cursor: "pointer",
-                  }
-                : {
-                    transition: "all 0.5s",
-                    filter: "brightness(0.5)",
-                    cursor: "pointer",
-                  }
-            }
-            onMouseOver={() => setActiveIndex(index)}
-          >
-            {child}
-          </motion.div>
-        ))}
+        {React.Children.map(children, (child: any, index: number) => {
+          const commonStyles = {
+            transition: "all 0.5s",
+            filter: activeIndex === index ? "brightness(1)" : "brightness(0.5)",
+          };
+
+          const motionDiv = (
+            <motion.div
+              key={index}
+              style={commonStyles}
+              onMouseOver={() => setActiveIndex(index)}
+            >
+              {child}
+            </motion.div>
+          );
+
+          return child.props.link ? (
+            <Link
+              href={child.props.link}
+              style={{ textDecoration: "none", cursor: "pointer" }}
+            >
+              {motionDiv}
+            </Link>
+          ) : (
+            motionDiv
+          );
+        })}
         <div
           style={{
             backgroundColor: "rgba(0, 0, 0, 0.5)",
