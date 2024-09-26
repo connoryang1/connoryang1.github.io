@@ -29,7 +29,8 @@ export default function Home() {
     setProjects([
       {
         title: "Portfolio",
-        description: "This is a project.",
+        description: "My portfolio website.",
+        technologies: ["React", "Next.js", "TypeScript", "Framer Motion"],
       },
       ...projectData,
     ]);
@@ -87,6 +88,32 @@ export default function Home() {
                     projects[activeIndex] &&
                     projects[activeIndex].title}
                 </b>
+                <p style={{
+                  fontSize: "1.5rem",
+                  textTransform: "none",
+                }}>
+                  {projects &&
+                    projects.length > activeIndex &&
+                    projects[activeIndex] &&
+                    projects[activeIndex].description}
+                </p>
+                {projects &&
+                  projects.length > activeIndex &&
+                  projects[activeIndex] &&
+                  projects[activeIndex].technologies &&
+                  projects[activeIndex].technologies.map((tech: string) => (
+                    <span
+                      key={tech}
+                      style={{
+                        fontSize: "1rem",
+                        fontStyle: "italic",
+                        marginRight: "1rem",
+                        color: "#999999",
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
               </div>
             </motion.div>
 

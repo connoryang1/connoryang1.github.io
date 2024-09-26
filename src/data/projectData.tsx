@@ -2,19 +2,25 @@ import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground"
 
 const projectData = [
   {
-    title: "Project 1",
-    description: "This is a project.",
+    title: "WolverineSoft",
+    description: "DevBlog for WolverineSoft Studio.",
     content: <DesktopBackground />,
+    link: "/projects/wolverinesoft",
+    // technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
-    title: "Project 2",
-    description: "This is another project.",
+    title: "M-Clubs",
+    description: "A club management app for the University of Michigan.",
     content: <DesktopBackground />,
+    link: "/projects/mclubs",
+    technologies: ["React Native", "Firebase", "Expo"],
   },
   {
-    title: "Project 3",
-    description: "This is a third project.",
+    title: "DStream",
+    description: "A multi-language compatible stream curation algorithm library.",
     content: <DesktopBackground />,
+    link: "/projects/dstream",
+    technologies: ["Python", "C++", "Rust"],
   }
 ];
 

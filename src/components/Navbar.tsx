@@ -1,32 +1,15 @@
 import {
   motion,
-  useMotionValueEvent,
   useScroll,
-  useTransform,
+  useTransform
 } from "framer-motion";
-import { useState } from "react";
+import Link from "next/link";
 import styles from "./Navbar.module.scss";
 
 export default function Navbar(props: any) {
   const { scrollYProgress } = useScroll({
     target: props.targetRef,
     offset: ["end end", "start start"],
-  });
-
-  const minimizedWindows = props.windows.filter(
-    (window: any) => window.minimized
-  );
-
-  const openWindows = props.windows.filter((window: any) => !window.minimized);
-
-  const [showMinimized, setShowMinimized] = useState(true);
-
-  useMotionValueEvent(scrollYProgress, "change", () => {
-    if (scrollYProgress.get() < 0.8) {
-      setShowMinimized(false);
-    } else {
-      setShowMinimized(true);
-    }
   });
 
   const opacity = useTransform(scrollYProgress, [0.7, 0.8], [1, 0]);
@@ -37,9 +20,15 @@ export default function Navbar(props: any) {
       style={{ opacity }}
     >
       <ol className={styles.navItems}>
-        <li className={styles.navText}>Home</li>
-        <li className={styles.navText}>About</li>
-        <li className={styles.navText}>Resume</li>
+        <li className={styles.navText}>
+          <Link href="/">Connor Yang</Link>
+        </li>
+        <li className={styles.navText}>
+          <Link href="/about">About</Link>
+        </li>
+        <li className={styles.navText}>
+          <Link href="/projects">Projects</Link>
+        </li>
       </ol>
     </motion.div>
   );

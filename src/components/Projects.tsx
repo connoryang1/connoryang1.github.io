@@ -43,10 +43,12 @@ export default function Projects({
                 ? {
                     transition: "all 0.5s",
                     filter: "brightness(1)",
+                    cursor: "pointer",
                   }
                 : {
                     transition: "all 0.5s",
                     filter: "brightness(0.5)",
+                    cursor: "pointer",
                   }
             }
             onMouseOver={() => setActiveIndex(index)}
@@ -61,8 +63,8 @@ export default function Projects({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            paddingLeft: "15rem",
-            paddingRight: "15rem",
+            paddingLeft: "8rem",
+            paddingRight: "8rem",
           }}
         >
           <a
@@ -75,7 +77,7 @@ export default function Projects({
             }}
             href="/projects"
           >
-            View all -&gt;
+            View all projects -&gt;
           </a>
         </div>
       </motion.div>
