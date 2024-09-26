@@ -7,13 +7,15 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import Navbar from "@/components/Navbar";
-import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground";
 import Projects from "@/components/Projects";
+import projectData from "@/data/projectData";
 import windowData from "@/data/windowData";
 
 export default function Home() {
   const [windows, setWindows] = useState(windowData);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [projects, setProjects] = useState<any[]>([]);
 
   const targetRef = useRef(null);
 
@@ -24,12 +26,25 @@ export default function Home() {
   const opacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]);
 
   useEffect(() => {
+    setProjects([
+      {
+        title: "Portfolio",
+        description: "This is a project.",
+      },
+      ...projectData,
+    ]);
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // console.log(projects);
+    console.log(activeIndex);
+  }, [activeIndex]);
 
   return (
     <>
@@ -66,11 +81,20 @@ export default function Home() {
                   paddingTop: "1rem",
                 }}
               >
-                <b>Portfolio Website</b>
+                <b>
+                  {projects &&
+                    projects.length > activeIndex &&
+                    projects[activeIndex] &&
+                    projects[activeIndex].title}
+                </b>
               </div>
             </motion.div>
 
-            <Projects targetRef={targetRef}>
+            <Projects
+              targetRef={targetRef}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            >
               <Desktop
                 windows={windows}
                 setWindows={setWindows}
@@ -78,9 +102,9 @@ export default function Home() {
                 targetRef={targetRef}
                 homeScrollProgress={scrollYProgress}
               />
-              <DesktopBackground />
-              <DesktopBackground />
-              <DesktopBackground />
+              {projectData.map((project: any) => (
+                project.content && project.content
+              ))}
             </Projects>
           </section>
           <Navbar

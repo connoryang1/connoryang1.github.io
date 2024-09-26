@@ -35,7 +35,6 @@ export default function Desktop({
   const touchSensor = useSensor(TouchSensor);
 
   useMotionValueEvent(scrollYProgress, "change", () => {
-    console.log(canInteract, homeScrollProgress.get());
     if (homeScrollProgress.get() > 0.9) {
       setCanInteract(true);
     } else {
