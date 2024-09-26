@@ -1,6 +1,6 @@
 import mclubs from "@/assets/mclubs.webp";
+import dstream from "@/assets/poster.webp";
 import wolverineSoft from "@/assets/wolverinesoft.webp";
-import DesktopBackground from "@/components/portfolio-desktop/DesktopBackground";
 import Image from "next/image";
 
 const projectData = [
@@ -25,7 +25,9 @@ const projectData = [
     title: "DStream",
     description:
       "A multi-language compatible stream curation algorithm library.",
-    content: <DesktopBackground />,
+    content: <Image src={dstream.src} alt="WolverineSoft Logo" fill={true} style={{
+      objectFit: "cover",
+    }}/>,
     link: "/projects/dstream",
     technologies: ["Python", "C++", "Rust"],
   },

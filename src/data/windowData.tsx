@@ -1,12 +1,10 @@
-// import documentIcon from "@/assets/icons/documentIcon.svg";
 import aboutIcon from "@/assets/icons/aboutIcon.svg";
 import waveIcon from "@/assets/icons/waveIcon.svg";
 import photo from "@/assets/photo.jpg";
 import { clamp } from "framer-motion";
 import Image from 'next/image';
 
-const width = window.innerWidth;
-console.log(width);
+const width = 1920;
 
 const windowData = [
   {

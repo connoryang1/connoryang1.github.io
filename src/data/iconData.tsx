@@ -3,7 +3,7 @@ import githubIcon from "@/assets/icons/githubIcon.svg";
 import linkedinIcon from "@/assets/icons/linkedinIcon.svg";
 import windowData from "./windowData";
 
-const width = window.innerWidth;
+const width = 1920;
 
 const iconData = [
   {
