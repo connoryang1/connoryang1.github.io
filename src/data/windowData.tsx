@@ -2,7 +2,11 @@
 import aboutIcon from "@/assets/icons/aboutIcon.svg";
 import waveIcon from "@/assets/icons/waveIcon.svg";
 import photo from "@/assets/photo.jpg";
+import { clamp } from "framer-motion";
 import Image from 'next/image';
+
+const width = window.innerWidth;
+console.log(width);
 
 const windowData = [
   {
@@ -16,7 +20,7 @@ const windowData = [
       <li>Open new windows using desktop icons.</li>
       <li><b>Scroll down to view more!</b></li>
     </ul>,
-    position: { x: 775, y: 320 },
+    position: { x: width > 800 ? 775 : width - 360, y: width > 800 ? 320 : 525 },
     size: { width: 280, height: 250 },
     active: true,
     minimized: false,
@@ -55,7 +59,7 @@ const windowData = [
 
       </ul>
     </div>,
-    position: { x: 1050, y: 70 },
+    position: { x: clamp(0, width - 350, 1050), y: 70 },
     size: { width: 320, height: 470 },
     active: false,
     minimized: false,
