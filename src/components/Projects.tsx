@@ -11,6 +11,8 @@ export default function Projects({
 }: any) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    layoutEffect: false,
+    // container: targetRef,
     offset: ["end end", "start start"],
   });
 
