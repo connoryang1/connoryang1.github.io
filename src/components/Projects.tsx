@@ -1,7 +1,7 @@
 import styles from "@/components/Projects.module.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Projects({
   children,
@@ -13,6 +13,10 @@ export default function Projects({
     target: targetRef,
     offset: ["end end", "start start"],
   });
+
+  useEffect(() => {
+    console.log(scrollYProgress);
+  }, [scrollYProgress]);
 
   const scale = useTransform(scrollYProgress, [0.5, 1], ["40%", "100%"], {
     // ease: easeIn,
