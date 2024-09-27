@@ -57,7 +57,7 @@ const windowData = [
 
       </ul>
     </div>,
-    position: { x: clamp(0, width - 350, 1050), y: 70 },
+    position: { x: clamp(0, width - 200, 1050), y: 70 },
     size: { width: 320, height: 470 },
     active: false,
     minimized: false,
