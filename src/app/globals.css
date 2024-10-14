@@ -8,13 +8,19 @@
   overscroll-behavior-y: none;
   scrollbar-width: none;
 
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Inter', sans-serif;
+}
+
+ul {
+  padding-left: 1.5rem;
 }
 
 html {
   scroll-behavior: smooth;
 
-  background-color: #000000;
+  background-color: #1f1f1f;
+  color: #FFFFFF;
 
   overflow-x: hidden;
 }

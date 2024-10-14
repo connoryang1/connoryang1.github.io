@@ -2,7 +2,6 @@
 
 import styles from "@/app/page.module.scss";
 import Desktop from "@/components/portfolio-desktop/Desktop";
-import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -44,6 +43,9 @@ export default function Home() {
 
   return (
     <>
+      <Navbar
+        targetRef={targetRef}
+      />
       <div
         className={`${styles.loadingScreen} ${!loading ? styles.hidden : ""}`}
       >
@@ -141,12 +143,6 @@ export default function Home() {
               ))}
             </Projects>
           </section>
-          <Navbar
-            generateRandomWindow={generateRandomWindow}
-            setWindowActive={setWindowActive}
-            windows={windows}
-            targetRef={targetRef}
-          />
         </div>
         <div className={styles.header}>Work Experience</div>
         <div style={{ height: "20rem" }}></div>
@@ -170,39 +166,6 @@ export default function Home() {
       minimized: false,
     });
 
-    setWindows(_windows);
-  }
-
-  function generateRandomWindow() {
-    if (windows.length >= 10) {
-      alert("You have reached the maximum number of windows.");
-      return;
-    }
-
-    let id;
-
-    for (let i = 1; i < windows.length + 1; i++) {
-      if (!windows.find((window) => window.id === "window-" + String(i))) {
-        id = String(i);
-        break;
-      }
-    }
-
-    const randX = Math.floor(Math.random() * 400);
-    const randY = Math.floor(Math.random() * 600);
-    const _windows = [
-      ...windows,
-      {
-        id: "window-" + id,
-        title: "Window " + id,
-        body: <div>Window {id}</div>,
-        size: { width: 400, height: 400 },
-        position: { x: randX, y: randY },
-        active: true,
-        minimized: false,
-        icon: faWindowRestore,
-      },
-    ];
     setWindows(_windows);
   }
 }

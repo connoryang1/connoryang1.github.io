@@ -33,4 +33,27 @@ const projectData = [
   },
 ];
 
+export const allProjects = [
+  {
+    name: "WolverineSoft",
+    id: "wolverinesoft",
+  },
+  {
+    name: "DStream",
+    id: "dstream",
+  },
+  {
+    name: "MClubs",
+    id: "mclubs",
+  },
+  {
+    name: "Gemini Lens",
+    id: "gemini-lens",
+  },
+  {
+    name: "Transcriber & Synthesizer",
+    id: "transcriber-synthesizer",
+  },
+];
+
 export default projectData;
