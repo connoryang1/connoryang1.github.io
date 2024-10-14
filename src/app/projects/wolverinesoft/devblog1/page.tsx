@@ -94,6 +94,13 @@ export default function Page() {
       </ul>
 
       <p><strong>Total Hours Spent:</strong> 10 hours, 30 minutes</p>
+
+      <p>
+        In all, this was a decently succesful two weeks.
+        Both me and Ishita were very busy for a lot of the second week due to midterms, and I had gotten quite ill, which were minor setbacks, but we were still able to finish our main goal of implementing a basic grid system.
+        Since this was also the week of fall break, we were unable to meet with the rest of the team, but we plan to discuss our progress and potential next steps in the next studio meeting.
+        For future sprints, we plan to continue working on the wall system, possibly adding more functionality and fixing some of the other issues we encountered.
+        </p>
     </div>
   );
 }
