@@ -1,4 +1,4 @@
-import styles from "@/app/projects/wolverinesoft/devblog1/page.module.css";
+import styles from "@/app/projects/wolverinesoft/page.module.css";
 import Image from "next/image";
 import newimg from "./new.png";
 import prev from "./prev.png";
