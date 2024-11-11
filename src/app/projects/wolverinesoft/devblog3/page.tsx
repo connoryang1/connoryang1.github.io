@@ -6,7 +6,7 @@ import preview from "./preview.png";
 export default function Page() {
   return (
     <div className={styles.container}>
-      <h1>Devblog 4: October 27th - November 10th </h1>
+      <h1>Devblog 3: October 27th - November 10th </h1>
 
       <hr />
 
