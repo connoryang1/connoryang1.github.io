@@ -50,7 +50,7 @@ export default function Page() {
       <h3>Adjusting wall preview: (2 hours)</h3>
 
       <p>
-        Since our previous building preview conssited of a single block that was resized to the length of the wall, we had to change it to be a series of walls that would be placed in the correct positions.
+        Since our previous building preview consisited of a single block that was resized to the length of the wall, we had to change it to be a series of walls that would be placed in the correct positions.
         We implemented this by repeatedly checking the snapped distance and direction of the cursor, and then programmatically building each of the wall segments on every frame.
       </p>
 
